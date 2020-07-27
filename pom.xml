@@ -30,4 +30,11 @@
   <description>
     Utilities applicable to the console.
   </description>
+  <dependencies>
+    <dependency>
+      <groupId>org.libj</groupId>
+      <artifactId>lang</artifactId>
+      <version>0.8.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 </project>
