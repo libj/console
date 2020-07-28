@@ -86,10 +86,10 @@ public class BrailleMapTest {
   @Test
   public void testToStringWorks() {
     BrailleMap map = new BrailleMap();
-    assertNotNull(map.toString().equals("⠀"));
+    assertEquals("⠀", map.toString());
     map.change(0, 0, Ansi.Color.DEFAULT);
-    assertTrue(map.toString().equals("⠁"));
+    assertEquals("[0;39m⠁[0;39m", map.toString());
     map.change(0, 0, null);
-    assertTrue(map.toString().equals("⠀"));
+    assertEquals("⠀", map.toString());
   }
 }
