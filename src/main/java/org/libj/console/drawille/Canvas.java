@@ -36,7 +36,10 @@ public class Canvas {
    * @var BrailleMap [] screen Flattened screen matrix
    */
   protected final int width;
+  protected final int pixelWidth;
   protected final int height;
+  protected final int pixelHeight;
+  protected final int area;
   protected final BrailleMap[] screen;
 
   /**
@@ -49,11 +52,13 @@ public class Canvas {
    */
   public Canvas(final int width, final int height) {
     this.width = width;
+    this.pixelWidth = width * 2;
     this.height = height;
-    this.screen = new BrailleMap[width * height];
-    for (int i = 0; i < this.width * this.height; ++i) {
-      this.screen[i] = new BrailleMap();
-    }
+    this.pixelHeight = height * 4;
+    this.area = width * height;
+    this.screen = new BrailleMap[area];
+    for (int i = 0; i < area; ++i)
+      screen[i] = new BrailleMap();
   }
 
   /**
@@ -80,7 +85,7 @@ public class Canvas {
    * @return Integer True pixel width
    */
   public int getWidth() {
-    return width * 2;
+    return pixelWidth;
   }
 
   /**
@@ -91,7 +96,7 @@ public class Canvas {
    * @return Integer True pixel width
    */
   public int getHeight() {
-    return height * 4;
+    return pixelHeight;
   }
 
   /**
@@ -119,9 +124,9 @@ public class Canvas {
    * @param Boolean value Activation to set on pixel
    * @return void
    */
-  public void change(int x, int y, Ansi.Color color) {
+  public void change(final int x, final int y, final Ansi.Color color) {
     checkRange(x, y);
-    BrailleMap map = screen[((y / 4) * width) + (x / 2)];
+    final BrailleMap map = screen[((y / 4) * width) + (x / 2)];
     map.change(x % 2, y % 4, color);
   }
 
@@ -149,7 +154,7 @@ public class Canvas {
    * @param Integer y Vertical coordinate of pixel
    * @return void
    */
-  public void unset(int x, int y) {
+  public void unset(final int x, final int y) {
     change(x, y, null);
   }
 
@@ -160,7 +165,7 @@ public class Canvas {
    * @return void
    */
   public void clear() {
-    for (int i = 0; i < width * height; ++i) {
+    for (int i = 0; i < area; ++i) {
       screen[i].reset();
     }
   }
@@ -169,7 +174,7 @@ public class Canvas {
    * This method traverses through all the BrailleMap objects and renders out
    * the sub-matrices by asking for the object's string value with the getString
    * method. It then prints them all out to the screen by using the overloaded
-   * cooresponding render method.
+   * corresponding render method.
    *
    * @return void
    */
@@ -193,16 +198,12 @@ public class Canvas {
    * @throws IOException ByteArrayOutputStream throws exception
    */
   public OutputStream render(final OutputStream stream) throws IOException {
-    for (int i = 0; i < width * height; ++i) {
-      final String brailleMap = screen[i].toString();
-      final byte[] bytes = brailleMap.getBytes();
-      stream.write(bytes);
-      if (i % width == width - 1) {
-        stream.write("\n".toString().getBytes());
-      }
+    for (int i = 0; i < area; ++i) {
+      stream.write(screen[i].toString().getBytes());
+      if (i % width == width - 1)
+        stream.write('\n');
     }
 
     return stream;
   }
-
 }

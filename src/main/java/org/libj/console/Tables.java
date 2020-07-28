@@ -424,6 +424,14 @@ public final class Tables {
     return printTable(borders, align, 1, false, columns);
   }
 
+  private static int maxLengthPrintable(final String[] strings) {
+    int len = 0;
+    for (int i = 0; i < strings.length; ++i)
+      len = Math.max(len, Strings.lengthPrintable(strings[i]));
+
+    return len;
+  }
+
   /**
    * Returns a string with a table layout of the provided 2 dimensional array of
    * columns.
@@ -442,36 +450,51 @@ public final class Tables {
     if (cells == 1)
       firstColumnOneCell = false;
 
+    // Count the total number of rows
+    int numRows = 0;
+    for (int c = 0; c < columns.length; ++c)
+      if (columns[c] != null)
+        numRows = Math.max(numRows, columns[c].length / cells);
+
+    ++numRows; // heading row
+    final int[] heights = new int[numRows];
+
     final String cellPadding = borders ? " │ " : " ";
     final int cellPaddingLength = cellPadding.length();
     int maxRows = 0;
     // Calculate the cell widths for each column
     final int[] widths = new int[columns.length * cells - (firstColumnOneCell ? 1 : 0)];
-    for (int i = 0; i < columns.length; ++i) {
-      final int w = i * cells - (i > 0 && firstColumnOneCell ? 1 : 0);
-      final String[] rows = columns[i];
+    for (int c = 0, h = 0; c < columns.length; ++c, h = 0) {
+      final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
+      final String[] rows = columns[c];
       if (rows != null && rows.length > 0) {
         maxRows = Math.max(maxRows, rows.length);
         // First row is the heading, which has only 1 cell
-        final int headingWidth = rows[0] == null ? 0 : Strings.lengthPrintable(rows[0]);
-        for (int j = 0; j < cells; ++j) {
-          final int width = widths[w + j];
+        String[] multiline = rows[0].split("\n");
+        heights[h] = Math.max(heights[h++], multiline.length);
+        final int headingWidth = rows[0] == null ? 0 : maxLengthPrintable(multiline);
+        for (int i = 0; i < cells; ++i) {
+          final int width = widths[w + i];
           int cellWidth = headingWidth;
-          if (i == 0 && firstColumnOneCell)
-            ++j;
+          if (c == 0 && firstColumnOneCell)
+            ++i;
           else
             cellWidth = (int)Math.ceil((cellWidth - (cellPaddingLength * (cells - 1d))) / cells);
 
-          widths[w + j] = Math.max(width, cellWidth);
+          widths[w + i] = Math.max(width, cellWidth);
         }
 
         // Following rows have `cells` number of cells
-        final int inc = i == 0 && firstColumnOneCell ? 1 : cells;
-        for (int k = 1; k < rows.length; k += inc) {
-          for (int j = 0; j < inc; ++j) {
-            final int width = widths[w + j];
-            final int r = j + k;
-            widths[w + j] = Math.max(width, r >= rows.length || rows[r] == null ? 0 : Strings.lengthPrintable(rows[r]));
+        final int inc = c == 0 && firstColumnOneCell ? 1 : cells;
+        for (int r = 1; r < rows.length; r += inc, ++h) {
+          for (int i = 0; i < inc; ++i) {
+            final int width = widths[w + i];
+            final int j = i + r;
+            if (j < rows.length && rows[j] != null) {
+              multiline = rows[j].split("\n");
+              heights[h] = Math.max(heights[h], multiline.length);
+              widths[w + i] = Math.max(width, maxLengthPrintable(multiline));
+            }
           }
         }
       }
@@ -483,64 +506,73 @@ public final class Tables {
     // Print the top border
     if (borders) {
       builder.append('╔');
-      for (int i = 0; i < columns.length; ++i) {
-        final int w = i * cells - (i > 0 && firstColumnOneCell ? 1 : 0);
-        if (i > 0)
+      for (int c = 0; c < columns.length; ++c) {
+        final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
+        if (c > 0)
           builder.append('╦');
 
         // Calculate the full column width across the # of `cells`
         int fullWidth = -cellPaddingLength;
-        for (int j = 0; j < cells; ++j) {
-          final int width = widths[w + j];
+        for (int i = 0; i < cells; ++i) {
+          final int width = widths[w + i];
           fullWidth += width + cellPaddingLength;
-          if (i == 0 && firstColumnOneCell)
+          if (c == 0 && firstColumnOneCell)
             break;
         }
 
-        builder.append(Strings.repeat("═", fullWidth + 2));
+        builder.append(Strings.repeat('═', fullWidth + 2));
       }
 
-      builder.append("╗\n║ ");
+      builder.append('╗');
     }
 
     // Print the heading row
     String[] rows;
-    for (int i = 0; i < columns.length; ++i) {
-      final int w = i * cells - (i > 0 && firstColumnOneCell ? 1 : 0);
-      rows = columns[i];
-      final String row = rows == null || rows[0] == null ? "" : rows[0];
-      // Calculate the full column width across the # of `cells`
-      int fullWidth = -cellPaddingLength;
-      for (int j = 0; j < cells; ++j) {
-        final int width = widths[w + j];
-        fullWidth += width + cellPaddingLength;
-        if (i == 0 && firstColumnOneCell)
-          break;
+    for (int h = 0; h < heights[0]; ++h) {
+      builder.append("\n║ ");
+      for (int c = 0; c < columns.length; ++c) {
+        final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
+        rows = columns[c];
+        String row = rows == null || rows[0] == null ? "" : rows[0];
+        if (heights[0] != 1) {
+          final String[] multiline = row.split("\n");
+          final int m = h - (heights[0] - multiline.length);
+          row = -1 < m && m < multiline.length ? multiline[m] : "";
+        }
+
+        // Calculate the full column width across the # of `cells`
+        int fullWidth = -cellPaddingLength;
+        for (int i = 0; i < cells; ++i) {
+          final int width = widths[w + i];
+          fullWidth += width + cellPaddingLength;
+          if (c == 0 && firstColumnOneCell)
+            break;
+        }
+
+        builder.append(Strings.pad(row, Align.CENTER, fullWidth, ' ', true));
+        if (borders)
+          builder.append(" ║");
+
+        builder.append(' ');
       }
-
-      builder.append(Strings.pad(row, Align.CENTER, fullWidth, ' ', false));
-      if (borders)
-        builder.append(" ║");
-
-      builder.append(' ');
     }
 
     // Print the middle border
     if (borders) {
       builder.append("\n╠");
-      for (int i = 0; i < columns.length; ++i) {
-        final int w = i * cells - (i > 0 && firstColumnOneCell ? 1 : 0);
-        if (i > 0)
+      for (int c = 0; c < columns.length; ++c) {
+        final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
+        if (c > 0)
           builder.append('╬');
 
         builder.append('═');
-        for (int j = 0; j < cells; ++j) {
-          if (j > 0)
+        for (int i = 0; i < cells; ++i) {
+          if (i > 0)
             builder.append("═╤═");
 
-          final int width = widths[w + j];
+          final int width = widths[w + i];
           builder.append(Strings.repeat("═", width));
-          if (i == 0 && firstColumnOneCell)
+          if (c == 0 && firstColumnOneCell)
             break;
         }
 
@@ -551,23 +583,23 @@ public final class Tables {
     }
 
     // Print the data rows
-    for (int k = 1; k < maxRows; k += cells) {
+    for (int r = 1; r < maxRows; r += cells) {
       builder.append('\n');
       if (borders)
         builder.append("║ ");
 
-      for (int i = 0; i < columns.length; ++i) {
-        final int w = i * cells - (i > 0 && firstColumnOneCell ? 1 : 0);
-        final int r = k > 1 && i == 0 && firstColumnOneCell ? (k + 1) / 2 : k;
-        rows = columns[i];
+      for (int c = 0; c < columns.length; ++c) {
+        final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
+        final int i = r > 1 && c == 0 && firstColumnOneCell ? (r + 1) / 2 : r;
+        rows = columns[c];
         for (int j = 0; j < cells; ++j) {
           if (j > 0)
             builder.append(cellPadding);
 
-          final String cell = rows == null || r + j >= rows.length || rows[r + j] == null ? "" : rows[r + j];
+          final String cell = rows == null || i + j >= rows.length || rows[i + j] == null ? "" : rows[i + j];
           final int width = widths[w + j];
           builder.append(Strings.pad(cell, align, width, ' ', false));
-          if (i == 0 && firstColumnOneCell)
+          if (c == 0 && firstColumnOneCell)
             break;
         }
 
@@ -581,19 +613,19 @@ public final class Tables {
     // Print the bottom border
     if (borders) {
       builder.append("\n╚");
-      for (int i = 0; i < columns.length; ++i) {
-        final int w = i * cells - (i > 0 && firstColumnOneCell ? 1 : 0);
-        if (i > 0)
+      for (int c = 0; c < columns.length; ++c) {
+        final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
+        if (c > 0)
           builder.append('╩');
 
         builder.append('═');
-        for (int j = 0; j < cells; ++j) {
-          if (j > 0)
+        for (int i = 0; i < cells; ++i) {
+          if (i > 0)
             builder.append("═╧═");
 
-          final int width = widths[w + j];
+          final int width = widths[w + i];
           builder.append(Strings.repeat("═", width));
-          if (i == 0 && firstColumnOneCell)
+          if (c == 0 && firstColumnOneCell)
             break;
         }
 
