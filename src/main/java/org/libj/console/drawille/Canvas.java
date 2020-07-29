@@ -17,6 +17,7 @@
 
 package org.libj.console.drawille;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
@@ -197,13 +198,30 @@ public class Canvas {
    * @return ByteArrayOutputStream Same stream that was passed in
    * @throws IOException ByteArrayOutputStream throws exception
    */
-  public OutputStream render(final OutputStream stream) throws IOException {
+  public OutputStream render(final OutputStream out) throws IOException {
     for (int i = 0; i < area; ++i) {
-      stream.write(screen[i].toString().getBytes());
+      out.write(screen[i].toString().getBytes());
       if (i % width == width - 1)
-        stream.write('\n');
+        out.write('\n');
     }
 
-    return stream;
+    return out;
+  }
+
+  @Override
+  public String toString() {
+    try {
+      final ByteArrayOutputStream writer = new ByteArrayOutputStream();
+      for (int i = 0; i < area; ++i) {
+        writer.write(screen[i].toString().getBytes());
+        if (i % width == width - 1)
+          writer.write('\n');
+      }
+
+      return new String(writer.toByteArray());
+    }
+    catch (final IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 }
