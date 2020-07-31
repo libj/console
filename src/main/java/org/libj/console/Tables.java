@@ -454,7 +454,7 @@ public final class Tables {
     int numRows = 0;
     for (int c = 0; c < columns.length; ++c)
       if (columns[c] != null)
-        numRows = Math.max(numRows, columns[c].length / cells);
+        numRows = Math.max(numRows, firstColumnOneCell ? columns[c].length : columns[c].length / cells);
 
     ++numRows; // heading row
     final int[] heights = new int[numRows];
