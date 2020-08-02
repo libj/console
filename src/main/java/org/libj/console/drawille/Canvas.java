@@ -51,7 +51,7 @@ public class Canvas {
    * @param Integer width The desired width of the canvas
    * @param Integer height The desired height of the canvas
    */
-  public Canvas(final int width, final int height) {
+  public Canvas(final int width, final int height, final Ansi.Color border) {
     this.width = width;
     this.pixelWidth = width * 2;
     this.height = height;
@@ -60,6 +60,22 @@ public class Canvas {
     this.screen = new BrailleMap[area];
     for (int i = 0; i < area; ++i)
       screen[i] = new BrailleMap();
+
+    if (border != null) {
+      for (int x = 0; x < pixelWidth; ++x) {
+        change(x, 0, border);
+        change(x, pixelHeight - 1, border);
+      }
+
+      for (int y = 0; y < pixelHeight; ++y) {
+        change(0, y, border);
+        change(pixelWidth - 1, y, border);
+      }
+    }
+  }
+
+  public Canvas(final int width, final int height) {
+    this(width, height, null);
   }
 
   /**
