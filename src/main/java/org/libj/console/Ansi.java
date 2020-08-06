@@ -24,26 +24,40 @@ import java.util.function.Function;
  * Class for utilities related to ANSI standards.
  */
 public final class Ansi {
+  private static Color[] colors = new Color[10];
+  private static Intensity[][] intensities = new Intensity[5][7];
+
   /**
    * Enum of ANSI color codes.
    */
   public enum Color implements Function<String,String> {
-    BLACK(0),
-    BLUE(4),
-    CYAN(6),
-    DEFAULT(9),
-    GREEN(2),
-    MAGENTA(5),
-    RED(1),
-    WHITE(7),
-    YELLOW(3);
+    BLACK(0, "black"),
+    BLUE(4, "blue"),
+    CYAN(6, "cyan"),
+    DEFAULT(9, null),
+    GREEN(2, "green"),
+    MAGENTA(5, "magenta"),
+    RED(1, "red"),
+    WHITE(7, "white"),
+    YELLOW(3, "yellow");
 
     private final String lowerCase;
     private final String code;
+    private final String css;
 
-    Color(final int code) {
+    Color(final int code, final String css) {
       this.lowerCase = name().toLowerCase();
       this.code = String.valueOf(code);
+      this.css = css;
+      colors[code] = this;
+    }
+
+    public String toCSS() {
+      return css != null ? "color:" + css : null;
+    }
+
+    String toSequence() {
+      return String.valueOf(code);
     }
 
     /**
@@ -68,27 +82,42 @@ public final class Ansi {
       final int index = Arrays.binarySearch(values, str.toLowerCase(), comparator);
       return index < 0 ? null : values[index];
     }
+
+    public static Color fromCode(final int code) {
+      return colors[code];
+    }
   }
 
   /**
    * Enum of ANSI intensity codes.
    */
   public enum Intensity implements Function<String,String> {
-    BOLD(3, 1),
-    DEFAULT(3, 0),
-    FAINT(3, 2),
-    INTENSE(9, 0),
-    ITALIC(3, 3),
-    UNDERLINE(3, 4);
+    BOLD(1, 3, "font-weight:bolder"),
+    DEFAULT(0, 3, null),
+    FAINT(2, 3, "font-weight:light"),
+    INTENSE(0, 9, "font-weight:bold"),
+    ITALIC(3, 3, "font-weight:italic"),
+    UNDERLINE(4, 3, "text-decoration:underline");
 
     private final String lowerCase;
-    private final String group;
     private final String strength;
+    private final String group;
+    private final String css;
 
-    Intensity(final int group, final int strength) {
+    Intensity(final int strength, final int group, final String css) {
       this.lowerCase = name().toLowerCase();
-      this.group = String.valueOf(group);
       this.strength = String.valueOf(strength);
+      this.group = String.valueOf(group);
+      this.css = css;
+      intensities[strength][group - 3] = this;
+    }
+
+    public String toCSS() {
+      return css;
+    }
+
+    String toSequence() {
+      return strength + ";" + group;
     }
 
     /**
@@ -113,11 +142,15 @@ public final class Ansi {
       final int index = Arrays.binarySearch(values, str.toLowerCase(), comparator);
       return index < 0 ? null : values[index];
     }
+
+    public static Intensity fromCode(final int strength, final int group) {
+      return intensities[strength][group - 3];
+    }
   }
 
   private static final String ENCODE_START = "\033[";
   private static final String ENCODE_END = "m";
-  private static final String RESET = "0;3" + Color.DEFAULT.code;
+  private static final String RESET = "0;39";
 
   /**
    * Applies the specified {@code intensity} to the provided {@code str}.
@@ -171,10 +204,74 @@ public final class Ansi {
     return apply0(str, intensity, color);
   }
 
+  /**
+   * Accepts a string that may contain ANSI escapes for colors and intensities,
+   * and returns an equivalent string with the same colors and intensities as
+   * HTML+CSS tags.
+   *
+   * @param str The string whose ANSI-escaped colors and/or intensities are to
+   *          be transformed into HTML+CSS equivalents.
+   * @return The transformed string.
+   */
+  public static String toHtml(final String str) {
+    final StringBuilder builder = new StringBuilder();
+    final char[] chars = str.toCharArray();
+    char ch0, ch1 = Character.MAX_VALUE;
+    int strength = Integer.MIN_VALUE;
+    int group = Integer.MIN_VALUE;
+    Intensity intensity = null;
+    Color color = null;
+    for (int i = 0; i < chars.length; ++i, ch1 = ch0) {
+      ch0 = chars[i];
+      if (color != null && intensity != null && ch0 == 'm') {
+        if (color == Color.DEFAULT && intensity == Intensity.DEFAULT) {
+          builder.append("</span>");
+        }
+        else {
+          builder.append("<span style=\"");
+          if (intensity != Intensity.DEFAULT)
+            builder.append(intensity.toCSS()).append(';');
+
+          if (color != Color.DEFAULT)
+            builder.append(color.toCSS()).append(';');
+
+          builder.append("\">");
+        }
+
+        strength = Integer.MIN_VALUE;
+        group = Integer.MIN_VALUE;
+        intensity = null;
+        color = null;
+      }
+      else if (group == Integer.MAX_VALUE) {
+        group = ch0 - '0';
+      }
+      else if (group != Integer.MIN_VALUE) {
+        color = Color.fromCode(ch0 - '0');
+        intensity = Intensity.fromCode(strength, group);
+      }
+      else if (strength == Integer.MAX_VALUE) {
+        strength = ch0 - '0';
+      }
+      else if (strength != Integer.MIN_VALUE && group == Integer.MIN_VALUE && ch0 == ';') {
+        group = Integer.MAX_VALUE;
+      }
+      else if (ch0 == '[' && ch1 == '\033') {
+        strength = Integer.MAX_VALUE;
+        builder.setLength(builder.length() - 1);
+      }
+      else {
+        builder.append(ch0);
+      }
+    }
+
+    return builder.toString();
+  }
+
   private static String apply0(final String str, Intensity intensity, Color color) {
     final StringBuilder builder = new StringBuilder();
     builder.append(ENCODE_START);
-    builder.append(intensity.strength).append(';').append(intensity.group).append(color.code);
+    builder.append(intensity.toSequence()).append(color.toSequence());
     builder.append(ENCODE_END);
     builder.append(str);
     builder.append(ENCODE_START);

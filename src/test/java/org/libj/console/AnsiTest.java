@@ -23,22 +23,26 @@ import org.libj.console.Ansi.Intensity;
 public class AnsiTest {
   private static final String str = "The quick brown fox jumps over the lazy dog";
 
+  private static String test(final String str) {
+    return str + " " + Ansi.toHtml(str);
+  }
+
   @Test
   public void testColor() {
     for (final Color color : Color.values())
-      System.out.println("C[" + color + "] " + color.apply(str));
+      System.out.println("C[" + color + "] " + test(color.apply(str)));
   }
 
   @Test
   public void testIntensity() {
     for (final Intensity intensity : Intensity.values())
-      System.out.println("I[" + intensity + "] " + intensity.apply(str));
+      System.out.println("I[" + intensity + "] " + test(intensity.apply(str)));
   }
 
   @Test
   public void testColorIntensity() {
     for (final Intensity intensity : Intensity.values())
       for (final Color color : Color.values())
-        System.out.println("I[" + intensity + "] C[" + color + "] " + Ansi.apply(str, intensity, color));
+        System.out.println("I[" + intensity + "] C[" + color + "] " + test(Ansi.apply(str, intensity, color)));
   }
 }
