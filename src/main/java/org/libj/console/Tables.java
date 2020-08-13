@@ -37,7 +37,7 @@ public final class Tables {
    * @throws NullPointerException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final Object[] data, final String ... headings) {
-    return printTable(false, Align.LEFT, 1, false, data, headings);
+    return printTable(false, Align.CENTER, Align.LEFT, 1, false, data, headings);
   }
 
   /**
@@ -60,7 +60,7 @@ public final class Tables {
    * @throws NullPointerException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final Object[] data, final int cells, final boolean firstColumnOneCell, final String ... headings) {
-    return printTable(false, Align.LEFT, cells, firstColumnOneCell, data, headings);
+    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, data, headings);
   }
 
   /**
@@ -80,7 +80,7 @@ public final class Tables {
    * @throws NullPointerException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final String[] data, final String ... headings) {
-    return printTable(false, Align.LEFT, 1, false, data, headings);
+    return printTable(false, Align.CENTER, Align.LEFT, 1, false, data, headings);
   }
 
   /**
@@ -103,7 +103,7 @@ public final class Tables {
    * @throws NullPointerException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final String[] data, final int cells, final boolean firstColumnOneCell, final String ... headings) {
-    return printTable(false, Align.LEFT, cells, firstColumnOneCell, data, headings);
+    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, data, headings);
   }
 
   /**
@@ -118,8 +118,8 @@ public final class Tables {
    *         into columns with the provided {@code headings}.
    * @throws NullPointerException If {@code data} or {@code headings} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final Object[] data, final String ... headings) {
-    return printTable(borders, align, 1, false, data, headings);
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final Object[] data, final String ... headings) {
+    return printTable(borders, alignHeading, align, 1, false, data, headings);
   }
 
   /**
@@ -137,16 +137,16 @@ public final class Tables {
    *         into columns with the provided {@code headings}.
    * @throws NullPointerException If {@code data} or {@code headings} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] data, final String ... headings) {
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] data, final String ... headings) {
     if (data.getClass().getComponentType() == String.class)
-      return printTable(borders, align, cells, firstColumnOneCell, (String[])data, headings);
+      return printTable(borders, alignHeading, align, cells, firstColumnOneCell, (String[])data, headings);
 
     final String[] strings = new String[data.length];
     for (int i = 0; i < data.length; ++i)
       if (data[i] != null)
         strings[i] = String.valueOf(data[i]);
 
-    return printTable(borders, align, cells, firstColumnOneCell, strings, headings);
+    return printTable(borders, alignHeading, align, cells, firstColumnOneCell, strings, headings);
   }
 
   /**
@@ -161,8 +161,8 @@ public final class Tables {
    *         into columns with the provided {@code headings}.
    * @throws NullPointerException If {@code data} or {@code headings} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final String[] data, final String ... headings) {
-    return printTable(borders, align, 1, false, data, headings);
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final String[] data, final String ... headings) {
+    return printTable(borders, alignHeading, align, 1, false, data, headings);
   }
 
   /**
@@ -180,7 +180,7 @@ public final class Tables {
    *         into columns with the provided {@code headings}.
    * @throws NullPointerException If {@code data} or {@code headings} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final int cells, final boolean firstColumnOneCell, final String[] data, final String ... headings) {
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final String[] data, final String ... headings) {
     final int rows = data.length / headings.length;
     final int remainder = data.length % headings.length == 0 ? 0 : 1;
 
@@ -197,7 +197,7 @@ public final class Tables {
       }
     }
 
-    return printTable(borders, align, cells, firstColumnOneCell, columns);
+    return printTable(borders, alignHeading, align, cells, firstColumnOneCell, columns);
   }
 
   /**
@@ -215,7 +215,7 @@ public final class Tables {
    * @throws NullPointerException If {@code columns} is null.
    */
   public static String printTable(final String ... columns) {
-    return printTable(false, Align.LEFT, 1, false, columns);
+    return printTable(false, Align.CENTER, Align.LEFT, 1, false, columns);
   }
 
   /**
@@ -236,7 +236,7 @@ public final class Tables {
    * @throws NullPointerException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final String ... columns) {
-    return printTable(false, Align.LEFT, cells, firstColumnOneCell, columns);
+    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
   }
 
   /**
@@ -255,8 +255,8 @@ public final class Tables {
    * @return A string with a column layout of the provided 2 dimensional array.
    * @throws NullPointerException If {@code columns} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final String ... columns) {
-    return printTable(borders, align, 1, false, columns);
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final String ... columns) {
+    return printTable(borders, alignHeading, align, 1, false, columns);
   }
 
   /**
@@ -278,13 +278,13 @@ public final class Tables {
    * @return A string with a column layout of the provided 2 dimensional array.
    * @throws NullPointerException If {@code columns} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final int cells, final boolean firstColumnOneCell, final String ... columns) {
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final String ... columns) {
     // Split input strings into columns and rows
     final String[][] strings = new String[columns.length][];
     for (int i = 0; i < columns.length; ++i)
       strings[i] = columns[i] == null ? null : columns[i].split("\n");
 
-    return printTable(borders, Align.LEFT, cells, firstColumnOneCell, (Object[][])strings);
+    return printTable(borders, alignHeading, align, cells, firstColumnOneCell, (Object[][])strings);
   }
 
   /**
@@ -302,7 +302,7 @@ public final class Tables {
    * @throws NullPointerException If {@code columns} is null.
    */
   public static String printTable(final String[] ... columns) {
-    return printTable(false, Align.LEFT, 1, false, columns);
+    return printTable(false, Align.CENTER,  Align.LEFT, 1, false, columns);
   }
 
   /**
@@ -323,7 +323,7 @@ public final class Tables {
    * @throws NullPointerException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final String[] ... columns) {
-    return printTable(false, Align.LEFT, cells, firstColumnOneCell, columns);
+    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
   }
 
   /**
@@ -341,7 +341,7 @@ public final class Tables {
    * @throws NullPointerException If {@code columns} is null.
    */
   public static String printTable(final Object[] ... columns) {
-    return printTable(false, Align.LEFT, 1, false, columns);
+    return printTable(false, Align.CENTER, Align.LEFT, 1, false, columns);
   }
 
   /**
@@ -362,7 +362,7 @@ public final class Tables {
    * @throws NullPointerException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final Object[] ... columns) {
-    return printTable(false, Align.LEFT, cells, firstColumnOneCell, columns);
+    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
   }
 
   /**
@@ -375,8 +375,8 @@ public final class Tables {
    * @return A string with a column layout of the provided 2 dimensional array.
    * @throws NullPointerException If {@code columns} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final Object[] ... columns) {
-    return printTable(borders, align, 1, false, columns);
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final Object[] ... columns) {
+    return printTable(borders, alignHeading, align, 1, false, columns);
   }
 
   /**
@@ -392,9 +392,9 @@ public final class Tables {
    * @return A string with a column layout of the provided 2 dimensional array.
    * @throws NullPointerException If {@code columns} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] ... columns) {
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] ... columns) {
     if (columns.getClass().getComponentType() == String[].class)
-      return printTable(borders, align, (String[][])columns);
+      return printTable(borders, alignHeading, align, (String[][])columns);
 
     final String[][] strings = new String[columns.length][];
     for (int i = 0; i < strings.length; ++i) {
@@ -407,7 +407,7 @@ public final class Tables {
       }
     }
 
-    return printTable(borders, align, cells, firstColumnOneCell, strings);
+    return printTable(borders, alignHeading, align, cells, firstColumnOneCell, strings);
   }
 
   /**
@@ -420,8 +420,8 @@ public final class Tables {
    * @return A string with a column layout of the provided 2 dimensional array.
    * @throws NullPointerException If {@code columns} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final String[] ... columns) {
-    return printTable(borders, align, 1, false, columns);
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final String[] ... columns) {
+    return printTable(borders, alignHeading, align, 1, false, columns);
   }
 
   private static int maxLengthPrintable(final String[] strings) {
@@ -445,7 +445,7 @@ public final class Tables {
    * @return A string with a column layout of the provided 2 dimensional array.
    * @throws NullPointerException If {@code columns} is null.
    */
-  public static String printTable(final boolean borders, final Align align, final int cells, boolean firstColumnOneCell, final String[] ... columns) {
+  public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, boolean firstColumnOneCell, final String[] ... columns) {
     // Moot if cells == 1 and firstColumnOneCell == true
     if (cells == 1)
       firstColumnOneCell = false;
@@ -529,7 +529,9 @@ public final class Tables {
     // Print the heading row
     String[] rows;
     for (int h = 0; h < heights[0]; ++h) {
-      builder.append("\n║ ");
+      if (borders)
+        builder.append("\n║ ");
+
       for (int c = 0; c < columns.length; ++c) {
         final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
         rows = columns[c];
@@ -549,7 +551,7 @@ public final class Tables {
             break;
         }
 
-        builder.append(Strings.pad(row, Align.CENTER, fullWidth, ' ', true));
+        builder.append(Strings.pad(row, alignHeading, fullWidth, ' ', true));
         if (borders)
           builder.append(" ║");
 

@@ -88,28 +88,28 @@ public class TablesTest {
         final int cells = i + 1;
         System.out.println(Tables.printTable(array, column[0]));
         System.out.println();
-        System.out.println(Tables.printTable(false, LEFT, cells, false, array, column[0]));
+        System.out.println(Tables.printTable(false, LEFT, LEFT, cells, false, array, column[0]));
         System.out.println();
-        System.out.println(Tables.printTable(true, RIGHT, cells, false, array, column[0]));
+        System.out.println(Tables.printTable(true, RIGHT, RIGHT, cells, false, array, column[0]));
         System.out.println();
-        System.out.println(Tables.printTable(true, LEFT, cells, false, array, column[0]));
+        System.out.println(Tables.printTable(true, LEFT, LEFT, cells, false, array, column[0]));
         System.out.println();
 
         System.out.println(Tables.printTable(column));
         System.out.println();
-        System.out.println(Tables.printTable(false, LEFT, cells, false, column));
+        System.out.println(Tables.printTable(false, RIGHT, LEFT, cells, false, column));
         System.out.println();
-        System.out.println(Tables.printTable(true, RIGHT, cells, false, column));
+        System.out.println(Tables.printTable(true, LEFT, RIGHT, cells, false, column));
         System.out.println();
-        System.out.println(Tables.printTable(true, LEFT, cells, false, column));
+        System.out.println(Tables.printTable(true, RIGHT, LEFT, cells, false, column));
 
         System.out.println(Tables.printTable(row));
         System.out.println();
-        System.out.println(Tables.printTable(false, LEFT, cells, false, row));
+        System.out.println(Tables.printTable(false, CENTER, LEFT, cells, false, row));
         System.out.println();
-        System.out.println(Tables.printTable(true, RIGHT, cells, false, row));
+        System.out.println(Tables.printTable(true, CENTER, RIGHT, cells, false, row));
         System.out.println();
-        System.out.println(Tables.printTable(true, LEFT, cells, false, row));
+        System.out.println(Tables.printTable(true, CENTER, LEFT, cells, false, row));
       }
     }
   }
@@ -121,7 +121,7 @@ public class TablesTest {
     columns[1] = new String[] {"One", "324", "32", "43982", "4398", "380", "38"};
     columns[2] = new String[] {"Two", "1894", "189", "15", "1", "290", "29"};
     columns[3] = new String[] {"Three", "204", "20", "31", "3", "321", "32"};
-    System.out.println(Tables.printTable(true, LEFT, 2, false, columns));
+    System.out.println(Tables.printTable(true, LEFT, LEFT, 2, false, columns));
   }
 
   @Test
@@ -131,6 +131,6 @@ public class TablesTest {
     columns[1] = new String[] {"One", "324", "32", "43982", "4398", "380", "38"};
     columns[2] = new String[] {"Two", "1894", "189", "15", "1", "290", "29"};
     columns[3] = new String[] {"Three", "204", "20", "31", "3", "321", "32"};
-    System.out.println(Tables.printTable(true, LEFT, 2, true, columns));
+    System.out.println(Tables.printTable(true, LEFT, LEFT, 2, true, columns));
   }
 }

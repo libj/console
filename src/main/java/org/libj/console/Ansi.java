@@ -35,7 +35,7 @@ public final class Ansi {
     BLUE(4, "blue"),
     CYAN(6, "cyan"),
     DEFAULT(9, null),
-    GREEN(2, "green"),
+    GREEN(2, "lightgreen"),
     MAGENTA(5, "magenta"),
     RED(1, "red"),
     WHITE(7, "white"),
