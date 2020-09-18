@@ -221,13 +221,19 @@ public final class Ansi {
     int group = Integer.MIN_VALUE;
     Intensity intensity = null;
     Color color = null;
+    boolean hasEndTag = true;
     for (int i = 0; i < chars.length; ++i, ch1 = ch0) {
       ch0 = chars[i];
       if (color != null && intensity != null && ch0 == 'm') {
         if (color == Color.DEFAULT && intensity == Intensity.DEFAULT) {
           builder.append("</span>");
+          hasEndTag = true;
         }
         else {
+          if (!hasEndTag)
+            builder.append("</span>");
+
+          hasEndTag = false;
           builder.append("<span style=\"");
           if (intensity != Intensity.DEFAULT)
             builder.append(intensity.toCSS()).append(';');

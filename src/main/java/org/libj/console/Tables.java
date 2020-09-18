@@ -470,7 +470,7 @@ public final class Tables {
       if (rows != null && rows.length > 0) {
         maxRows = Math.max(maxRows, rows.length);
         // First row is the heading, which has only 1 cell
-        String[] multiline = rows[0].split("\n");
+        String[] multiline = rows[0] == null ? new String[0] : rows[0].split("\n");
         heights[h] = Math.max(heights[h++], multiline.length);
         final int headingWidth = rows[0] == null ? 0 : maxLengthPrintable(multiline);
         for (int i = 0; i < cells; ++i) {
@@ -600,7 +600,7 @@ public final class Tables {
 
           final String cell = rows == null || i + j >= rows.length || rows[i + j] == null ? "" : rows[i + j];
           final int width = widths[w + j];
-          builder.append(Strings.pad(cell, align, width, ' ', false));
+          builder.append(Strings.padAll(cell, align, width, ' ', false));
           if (c == 0 && firstColumnOneCell)
             break;
         }
