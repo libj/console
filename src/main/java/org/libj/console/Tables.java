@@ -111,6 +111,7 @@ public final class Tables {
    * organized into columns with the provided {@code headings}.
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param data The array of data.
    * @param headings The headings of the columns.
@@ -127,6 +128,7 @@ public final class Tables {
    * organized into columns with the provided {@code headings}.
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param cells The number of consecutive column elements per cell (except for
    *          the first and single heading column element).
@@ -154,6 +156,7 @@ public final class Tables {
    * organized into columns with the provided {@code headings}.
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param data The array of data.
    * @param headings The headings of the columns.
@@ -170,6 +173,7 @@ public final class Tables {
    * organized into columns with the provided {@code headings}.
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param cells The number of consecutive column elements per cell (except for
    *          the first and single heading column element).
@@ -250,6 +254,7 @@ public final class Tables {
    * </pre>
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
@@ -270,6 +275,7 @@ public final class Tables {
    * </pre>
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param cells The number of consecutive column elements per cell (except for
    *          the first and single heading column element).
@@ -370,6 +376,7 @@ public final class Tables {
    * columns.
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
@@ -384,6 +391,7 @@ public final class Tables {
    * columns.
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param cells The number of consecutive column elements per cell (except for
    *          the first and single heading column element).
@@ -415,6 +423,7 @@ public final class Tables {
    * columns.
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
@@ -437,6 +446,7 @@ public final class Tables {
    * columns.
    *
    * @param borders Whether to draw borders.
+   * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param cells The number of consecutive column elements per cell (except for
    *          the first and single heading column element).

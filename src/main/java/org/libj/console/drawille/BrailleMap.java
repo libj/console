@@ -27,15 +27,14 @@ import org.libj.console.Ansi;
  * needed to transform a matrix into a braille character. This class is meant to
  * be used as a sub-matrix.
  */
-@SuppressWarnings("javadoc")
 public class BrailleMap {
-  /**
-   * @var Integer UNICODE_OFFSET Braille characters unicode offset
-   * @var Integer [] TRANSFORM_MATRIX Transformation matrix for braille
-   * @var Boolean [] map Flattened pixel map matrix (4 by 2)
-   */
+  /** Braille characters unicode offset */
   protected final static int UNICODE_OFFSET = 10240;
+
+  /** Transformation matrix for braille */
   protected final static int[] TRANSFORM_MATRIX = {1, 8, 2, 16, 4, 32, 64, 128};
+
+  /** Flattened pixel map matrix (4 by 2) */
   protected Ansi.Color[] map;
 
   /**
@@ -53,9 +52,8 @@ public class BrailleMap {
    * 4 by 2 dot matrix, these bounds are taken to be the upper bound
    * respectively while negative numbers are taken as the lower bound.
    *
-   * @param Integer x Horizontal coordinate
-   * @param Integer y Vertical coordinate
-   * @return void
+   * @param x Horizontal coordinate
+   * @param y Vertical coordinate
    */
   protected void checkRange(int x, int y) {
     if (x < 0 || y < 0 || x > 1 || y > 3) {
@@ -68,10 +66,9 @@ public class BrailleMap {
    * matrix entry value. It then sets said value into the pixel matrix based on
    * the passed coordinates
    *
-   * @param Integer x Horizontal coordinate
-   * @param Integer y Vertical coordinate
-   * @param Boolean value The value to set matrix entry to
-   * @return void
+   * @param x Horizontal coordinate
+   * @param y Vertical coordinate
+   * @param color The color to set matrix entry to
    */
   public void change(int x, int y, Ansi.Color color) {
     this.checkRange(x, y);
@@ -83,8 +80,8 @@ public class BrailleMap {
    * the value that is saved in the pixel matrix based on the passed
    * coordinates.
    *
-   * @param Integer x Horizontal coordinate
-   * @param Integer y Vertical coordinate
+   * @param x Horizontal coordinate
+   * @param y Vertical coordinate
    * @return Boolean Saved state based on coordinates
    */
   public Ansi.Color get(int x, int y) {
@@ -96,9 +93,8 @@ public class BrailleMap {
    * This method takes in a horizontal and vertical coordinates, it then
    * activates the value into the pixel matrix based on the passed coordinates.
    *
-   * @param Integer x Horizontal coordinate
-   * @param Integer y Vertical coordinate
-   * @return void
+   * @param x Horizontal coordinate
+   * @param y Vertical coordinate
    */
   public void set(int x, int y) {
     this.set(x, y, Ansi.Color.DEFAULT);
@@ -113,9 +109,8 @@ public class BrailleMap {
    * deactivates the value into the pixel matrix based on the passed
    * coordinates.
    *
-   * @param Integer x Horizontal coordinate
-   * @param Integer y Vertical coordinate
-   * @return void
+   * @param x Horizontal coordinate
+   * @param y Vertical coordinate
    */
   public void unset(int x, int y) {
     this.change(x, y, null);
@@ -124,8 +119,6 @@ public class BrailleMap {
   /**
    * This method traverses through the pixel map matrix and deactivates all the
    * pixels in the matrix by setting all the values to false.
-   *
-   * @return void
    */
   public void reset() {
     Arrays.fill(this.map, null);

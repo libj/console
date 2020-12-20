@@ -23,26 +23,25 @@ package org.libj.console.drawille;
  * and paper. One can move the pen in three axis and based on the z axis, when
  * the pen moves it either draws on the paper or not.
  */
-@SuppressWarnings("javadoc")
 public class Turtle extends Canvas {
-
-  /**
-   * @param Double x Horizontal coordinate
-   * @param Double y Vertical coordinate
-   * @param Double a Angle
-   * @param Boolean isDrawing Is the pen down?
-   */
+  /** Horizontal coordinate */
   protected double x = 0;
+
+  /** Vertical coordinate */
   protected double y = 0;
+
+  /** Angle */
   protected double a = 0;
+
+  /** Is the pen down? */
   protected Boolean isDrawing = false;
 
   /**
    * This constructor simply calls the super constructor and passes the desired
    * dimensions.
    *
-   * @param Integer width Desired width of canvas
-   * @param Integer width Desired height of canvas
+   * @param width Desired width of canvas
+   * @param height Desired height of canvas
    */
   public Turtle(int width, int height) {
     super(width, height);
@@ -79,8 +78,6 @@ public class Turtle extends Canvas {
 
   /**
    * This method simply sets the state of the pen to be in the drawing state.
-   *
-   * @return void
    */
   public void down() {
     this.isDrawing = true;
@@ -89,8 +86,6 @@ public class Turtle extends Canvas {
   /**
    * This method simply sets the state of the pen to be in the non-drawing
    * state.
-   *
-   * @return void
    */
   public void up() {
     this.isDrawing = false;
@@ -100,8 +95,7 @@ public class Turtle extends Canvas {
    * This method takes in the angle to add to the right and adds it to the pen
    * angle.
    *
-   * @param double angle Angle to move right
-   * @return void
+   * @param angle Angle to move right
    */
   public void right(double angle) {
     this.a += angle;
@@ -111,8 +105,7 @@ public class Turtle extends Canvas {
    * This method takes in the angle to add to the left and subtracts it from pen
    * angle.
    *
-   * @param double angle Angle to move right
-   * @return void
+   * @param angle Angle to move right
    */
   public void left(double angle) {
     this.a -= angle;
@@ -124,8 +117,7 @@ public class Turtle extends Canvas {
    * this method by simply passing in the same scalar value of length but in the
    * opposite direction.
    *
-   * @param double length Length to move back
-   * @return void
+   * @param length Length to move back
    */
   public void backward(double length) {
     this.forward(length * -1);
@@ -135,8 +127,7 @@ public class Turtle extends Canvas {
    * This method takes in the length and expects us to move forwards with the
    * pen based on the current pen angle.
    *
-   * @param double length Length to move forward
-   * @return void
+   * @param length Length to move forward
    */
   public void forward(double length) {
     double theta = this.a / 180.0 * Math.PI;
@@ -151,9 +142,8 @@ public class Turtle extends Canvas {
    * isDrawing is false, then we do not draw and instead just move the pen to
    * those coordinates.
    *
-   * @param double x Horizontal coordinate
-   * @param double y Vertical coordinate
-   * @return void
+   * @param x Horizontal coordinate
+   * @param y Vertical coordinate
    */
   public void move(double x, double y) {
     if (this.isDrawing) {
@@ -181,5 +171,4 @@ public class Turtle extends Canvas {
     this.x = x;
     this.y = y;
   }
-
 }

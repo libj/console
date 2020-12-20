@@ -23,7 +23,6 @@ package org.libj.console.drawille;
  * The message is statically defined in this class and the caller only has to
  * pass in the out of bounds (x,y) value pairs.
  */
-@SuppressWarnings("javadoc")
 public class DrawilleException extends RuntimeException {
   private static final long serialVersionUID = -1492191868467342284L;
 
@@ -32,8 +31,8 @@ public class DrawilleException extends RuntimeException {
    * the user. These values are defined to be out of range by the caller,
    * therefore the caller will be alerted.
    *
-   * @param Integer x The passed horizontal coordinate
-   * @param Integer y The passed vertical coordinate
+   * @param x The passed horizontal coordinate
+   * @param y The passed vertical coordinate
    */
   public DrawilleException(int x, int y) {
     super(String.format("Out of range {x:%d,y:%d}", x, y));

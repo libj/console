@@ -29,18 +29,18 @@ import org.libj.console.Ansi;
  * sub-matrices. It is an abstraction of a pixel screen. Methods to interact
  * with those pixels can be found in this class.
  */
-@SuppressWarnings("javadoc")
 public class Canvas {
-  /**
-   * @var Integer width Width of the canvas
-   * @var Integer height Height of the canvas
-   * @var BrailleMap [] screen Flattened screen matrix
-   */
+  /** Width of the canvas */
   protected final int width;
   protected final int pixelWidth;
+
+  /** Height of the canvas */
   protected final int height;
   protected final int pixelHeight;
+
   protected final int area;
+
+  /** Flattened screen matrix */
   protected final BrailleMap[] screen;
 
   /**
@@ -48,8 +48,9 @@ public class Canvas {
    * matrix of BrailleMap objects. These objects serve as sub-matrices and
    * extend the 'pixel' definition that can be displayed on a screen.
    *
-   * @param Integer width The desired width of the canvas
-   * @param Integer height The desired height of the canvas
+   * @param width The desired width of the canvas
+   * @param height The desired height of the canvas
+   * @param border Border color.
    */
   public Canvas(final int width, final int height, final Ansi.Color border) {
     this.width = width;
@@ -85,9 +86,8 @@ public class Canvas {
    * respectively while negative numbers are taken as the lower bound. These
    * values are taken into effect by the getWidth and getHeight methods.
    *
-   * @param Integer x Horizontal coordinate
-   * @param Integer y Vertical coordinate
-   * @return void
+   * @param x Horizontal coordinate
+   * @param y Vertical coordinate
    */
   protected void checkRange(final int x, final int y) {
     if (x >= getWidth() || y >= getHeight() || x < 0 || y < 0)
@@ -121,8 +121,8 @@ public class Canvas {
    * value of the activation of said pixel. If true, the pixel is turned on,
    * otherwise it is off.
    *
-   * @param Integer x Horizontal coordinate of pixel
-   * @param Integer y Vertical coordinate of pixel
+   * @param x Horizontal coordinate of pixel
+   * @param y Vertical coordinate of pixel
    * @return Boolean The activation value of the pixel
    */
   public Ansi.Color get(final int x, final int y) {
@@ -136,10 +136,9 @@ public class Canvas {
    * activation state. It then applies that activation to said pixel that lives
    * in the passed coordinates.
    *
-   * @param Integer x Horizontal coordinate of pixel
-   * @param Integer y Vertical coordinate of pixel
-   * @param Boolean value Activation to set on pixel
-   * @return void
+   * @param x Horizontal coordinate of pixel
+   * @param y Vertical coordinate of pixel
+   * @param color Color to set on pixel
    */
   public void change(final int x, final int y, final Ansi.Color color) {
     checkRange(x, y);
@@ -151,9 +150,8 @@ public class Canvas {
    * This method takes in a horizontal and vertical coordinate, it then
    * activates said pixel by setting it's value to true.
    *
-   * @param Integer x Horizontal coordinate of pixel
-   * @param Integer y Vertical coordinate of pixel
-   * @return void
+   * @param x Horizontal coordinate of pixel
+   * @param y Vertical coordinate of pixel
    */
   public void set(final int x, final int y) {
     set(x, y, Ansi.Color.DEFAULT);
@@ -167,9 +165,8 @@ public class Canvas {
    * This method takes in a horizontal and vertical coordinate, it then
    * deactivates said pixel by setting it's value to false.
    *
-   * @param Integer x Horizontal coordinate of pixel
-   * @param Integer y Vertical coordinate of pixel
-   * @return void
+   * @param x Horizontal coordinate of pixel
+   * @param y Vertical coordinate of pixel
    */
   public void unset(final int x, final int y) {
     change(x, y, null);
@@ -178,8 +175,6 @@ public class Canvas {
   /**
    * This method traverses through all the BrailleMap objects that is stored to
    * make up the screen, it then resets all the values in those sub-matrices.
-   *
-   * @return void
    */
   public void clear() {
     for (int i = 0; i < area; ++i) {
@@ -192,8 +187,6 @@ public class Canvas {
    * the sub-matrices by asking for the object's string value with the getString
    * method. It then prints them all out to the screen by using the overloaded
    * corresponding render method.
-   *
-   * @return void
    */
   public void render() {
     try {
@@ -210,8 +203,8 @@ public class Canvas {
    * method. It then writes said output to the specified ByteArrayOutputStream.
    * This stream is then returned back to caller for method chaining.
    *
-   * @param ByteArrayOutputStream stream Stream to write to
-   * @return ByteArrayOutputStream Same stream that was passed in
+   * @param out Stream to write to
+   * @return Same stream that was passed in
    * @throws IOException ByteArrayOutputStream throws exception
    */
   public OutputStream render(final OutputStream out) throws IOException {
