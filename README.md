@@ -1,6 +1,6 @@
 # LibJ Console
 
-[![Build Status](https://travis-ci.org/libj/console.svg?branch=master)](https://travis-ci.org/libj/console)
+[![Build Status](https://travis-ic.org/libj/console.svg?branch=master)](https://travis-ic.org/libj/console)
 [![Coverage Status](https://coveralls.io/repos/github/libj/console/badge.svg)](https://coveralls.io/github/libj/console)
 [![Javadocs](https://www.javadoc.io/badge/org.libj/console.svg)](https://www.javadoc.io/doc/org.libj/console)
 [![Released Version](https://img.shields.io/maven-central/v/org.libj/console.svg)](https://mvnrepository.com/artifact/org.libj/console)
