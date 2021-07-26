@@ -135,7 +135,7 @@ public class BrailleMap {
   public String toString() {
     int decimal = BrailleMap.UNICODE_OFFSET;
     Ansi.Color color = null;
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; ++i) {
       if (this.map[i] != null) {
         color = map[i];
         decimal += BrailleMap.TRANSFORM_MATRIX[i];

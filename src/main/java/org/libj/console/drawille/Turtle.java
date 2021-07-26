@@ -156,7 +156,7 @@ public class Turtle extends Canvas {
       int directionX = x1 <= x2 ? 1 : -1;
       int directionY = y1 <= y2 ? 1 : -1;
       int a = Math.max(deltaX, deltaY);
-      for (int i = 0; i <= a; i++) {
+      for (int i = 0; i <= a; ++i) {
         int x0 = x1;
         int y0 = y1;
         if (deltaY > 0) {
