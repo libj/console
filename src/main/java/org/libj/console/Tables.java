@@ -16,6 +16,7 @@
 
 package org.libj.console;
 
+import org.libj.lang.Assertions;
 import org.libj.lang.Strings;
 import org.libj.lang.Strings.Align;
 
@@ -34,7 +35,8 @@ public final class Tables {
    * @param headings The headings of the columns.
    * @return A string with a table layout of the specified data array organized
    *         into columns with the provided {@code headings}.
-   * @throws NullPointerException If {@code data} or {@code headings} is null.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is
+   *           null.
    */
   public static String printTable(final Object[] data, final String ... headings) {
     return printTable(false, Align.CENTER, Align.LEFT, 1, false, data, headings);
@@ -57,7 +59,8 @@ public final class Tables {
    * @param headings The headings of the columns.
    * @return A string with a table layout of the specified data array organized
    *         into columns with the provided {@code headings}.
-   * @throws NullPointerException If {@code data} or {@code headings} is null.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is
+   *           null.
    */
   public static String printTable(final Object[] data, final int cells, final boolean firstColumnOneCell, final String ... headings) {
     return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, data, headings);
@@ -77,7 +80,8 @@ public final class Tables {
    * @param headings The headings of the columns.
    * @return A string with a table layout of the specified data array organized
    *         into columns with the provided {@code headings}.
-   * @throws NullPointerException If {@code data} or {@code headings} is null.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is
+   *           null.
    */
   public static String printTable(final String[] data, final String ... headings) {
     return printTable(false, Align.CENTER, Align.LEFT, 1, false, data, headings);
@@ -100,7 +104,8 @@ public final class Tables {
    * @param headings The headings of the columns.
    * @return A string with a table layout of the specified data array organized
    *         into columns with the provided {@code headings}.
-   * @throws NullPointerException If {@code data} or {@code headings} is null.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is
+   *           null.
    */
   public static String printTable(final String[] data, final int cells, final boolean firstColumnOneCell, final String ... headings) {
     return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, data, headings);
@@ -117,7 +122,8 @@ public final class Tables {
    * @param headings The headings of the columns.
    * @return A string with a table layout of the specified data array organized
    *         into columns with the provided {@code headings}.
-   * @throws NullPointerException If {@code data} or {@code headings} is null.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is
+   *           null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final Object[] data, final String ... headings) {
     return printTable(borders, alignHeading, align, 1, false, data, headings);
@@ -137,10 +143,11 @@ public final class Tables {
    * @param headings The headings of the columns.
    * @return A string with a table layout of the specified data array organized
    *         into columns with the provided {@code headings}.
-   * @throws NullPointerException If {@code data} or {@code headings} is null.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is
+   *           null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] data, final String ... headings) {
-    if (data.getClass().getComponentType() == String.class)
+    if (Assertions.assertNotNull(data).getClass().getComponentType() == String.class)
       return printTable(borders, alignHeading, align, cells, firstColumnOneCell, (String[])data, headings);
 
     final String[] strings = new String[data.length];
@@ -162,7 +169,8 @@ public final class Tables {
    * @param headings The headings of the columns.
    * @return A string with a table layout of the specified data array organized
    *         into columns with the provided {@code headings}.
-   * @throws NullPointerException If {@code data} or {@code headings} is null.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is
+   *           null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final String[] data, final String ... headings) {
     return printTable(borders, alignHeading, align, 1, false, data, headings);
@@ -182,10 +190,11 @@ public final class Tables {
    * @param headings The headings of the columns.
    * @return A string with a table layout of the specified data array organized
    *         into columns with the provided {@code headings}.
-   * @throws NullPointerException If {@code data} or {@code headings} is null.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is
+   *           null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final String[] data, final String ... headings) {
-    final int rows = data.length / headings.length;
+    final int rows = Assertions.assertNotNull(data).length / Assertions.assertNotNull(headings).length;
     final int remainder = data.length % headings.length == 0 ? 0 : 1;
 
     final String[][] columns = new String[headings.length][];
@@ -216,7 +225,7 @@ public final class Tables {
    *
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final String ... columns) {
     return printTable(false, Align.CENTER, Align.LEFT, 1, false, columns);
@@ -237,7 +246,7 @@ public final class Tables {
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final String ... columns) {
     return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
@@ -258,7 +267,7 @@ public final class Tables {
    * @param align Text alignment to be used for data cells.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final String ... columns) {
     return printTable(borders, alignHeading, align, 1, false, columns);
@@ -282,11 +291,11 @@ public final class Tables {
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final String ... columns) {
     // Split input strings into columns and rows
-    final String[][] strings = new String[columns.length][];
+    final String[][] strings = new String[Assertions.assertNotNull(columns).length][];
     for (int i = 0; i < columns.length; ++i)
       strings[i] = columns[i] == null ? null : columns[i].split("\n");
 
@@ -305,7 +314,7 @@ public final class Tables {
    *
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final String[] ... columns) {
     return printTable(false, Align.CENTER,  Align.LEFT, 1, false, columns);
@@ -326,7 +335,7 @@ public final class Tables {
    *          the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final String[] ... columns) {
     return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
@@ -344,7 +353,7 @@ public final class Tables {
    *
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final Object[] ... columns) {
     return printTable(false, Align.CENTER, Align.LEFT, 1, false, columns);
@@ -365,7 +374,7 @@ public final class Tables {
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final Object[] ... columns) {
     return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
@@ -380,7 +389,7 @@ public final class Tables {
    * @param align Text alignment to be used for data cells.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final Object[] ... columns) {
     return printTable(borders, alignHeading, align, 1, false, columns);
@@ -398,10 +407,10 @@ public final class Tables {
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] ... columns) {
-    if (columns.getClass().getComponentType() == String[].class)
+    if (Assertions.assertNotNull(columns).getClass().getComponentType() == String[].class)
       return printTable(borders, alignHeading, align, (String[][])columns);
 
     final String[][] strings = new String[columns.length][];
@@ -427,7 +436,7 @@ public final class Tables {
    * @param align Text alignment to be used for data cells.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final String[] ... columns) {
     return printTable(borders, alignHeading, align, 1, false, columns);
@@ -453,9 +462,10 @@ public final class Tables {
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
-   * @throws NullPointerException If {@code columns} is null.
+   * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, boolean firstColumnOneCell, final String[] ... columns) {
+    Assertions.assertNotNull(columns);
     // Moot if cells == 1 and firstColumnOneCell == true
     if (cells == 1)
       firstColumnOneCell = false;
