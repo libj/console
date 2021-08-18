@@ -215,15 +215,14 @@ public final class Ansi {
    */
   public static String toHtml(final String str) {
     final StringBuilder builder = new StringBuilder();
-    final char[] chars = str.toCharArray();
     char ch0, ch1 = Character.MAX_VALUE;
     int strength = Integer.MIN_VALUE;
     int group = Integer.MIN_VALUE;
     Intensity intensity = null;
     Color color = null;
     boolean hasEndTag = true;
-    for (int i = 0; i < chars.length; ++i, ch1 = ch0) {
-      ch0 = chars[i];
+    for (int i = 0, len = str.length(); i < len; ++i, ch1 = ch0) {
+      ch0 = str.charAt(i);
       if (color != null && intensity != null && ch0 == 'm') {
         if (color == Color.DEFAULT && intensity == Intensity.DEFAULT) {
           builder.append("</span>");
