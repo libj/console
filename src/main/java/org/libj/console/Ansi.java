@@ -213,7 +213,7 @@ public final class Ansi {
    *          be transformed into HTML+CSS equivalents.
    * @return The transformed string.
    */
-  public static String toHtml(final String str) {
+  public static String toHtml(final CharSequence str) {
     final StringBuilder builder = new StringBuilder();
     char ch0, ch1 = Character.MAX_VALUE;
     int strength = Integer.MIN_VALUE;
