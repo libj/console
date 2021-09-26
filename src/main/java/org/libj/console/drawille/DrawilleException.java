@@ -24,8 +24,6 @@ package org.libj.console.drawille;
  * pass in the out of bounds (x,y) value pairs.
  */
 public class DrawilleException extends RuntimeException {
-  private static final long serialVersionUID = -1492191868467342284L;
-
   /**
    * This constructor takes in an (x,y) value pair and displays those pairs to
    * the user. These values are defined to be out of range by the caller,
