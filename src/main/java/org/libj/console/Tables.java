@@ -16,7 +16,9 @@
 
 package org.libj.console;
 
-import org.libj.lang.Assertions;
+import static org.libj.lang.Assertions.*;
+import static org.libj.lang.Strings.Align.*;
+
 import org.libj.lang.Strings;
 import org.libj.lang.Strings.Align;
 
@@ -39,7 +41,7 @@ public final class Tables {
    *           null.
    */
   public static String printTable(final Object[] data, final String ... headings) {
-    return printTable(false, Align.CENTER, Align.LEFT, 1, false, data, headings);
+    return printTable(false, CENTER, LEFT, 1, false, data, headings);
   }
 
   /**
@@ -63,7 +65,7 @@ public final class Tables {
    *           null.
    */
   public static String printTable(final Object[] data, final int cells, final boolean firstColumnOneCell, final String ... headings) {
-    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, data, headings);
+    return printTable(false, CENTER, LEFT, cells, firstColumnOneCell, data, headings);
   }
 
   /**
@@ -84,7 +86,7 @@ public final class Tables {
    *           null.
    */
   public static String printTable(final String[] data, final String ... headings) {
-    return printTable(false, Align.CENTER, Align.LEFT, 1, false, data, headings);
+    return printTable(false, CENTER, LEFT, 1, false, data, headings);
   }
 
   /**
@@ -108,7 +110,7 @@ public final class Tables {
    *           null.
    */
   public static String printTable(final String[] data, final int cells, final boolean firstColumnOneCell, final String ... headings) {
-    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, data, headings);
+    return printTable(false, CENTER, LEFT, cells, firstColumnOneCell, data, headings);
   }
 
   /**
@@ -147,7 +149,7 @@ public final class Tables {
    *           null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] data, final String ... headings) {
-    if (Assertions.assertNotNull(data).getClass().getComponentType() == String.class)
+    if (assertNotNull(data).getClass().getComponentType() == String.class)
       return printTable(borders, alignHeading, align, cells, firstColumnOneCell, (String[])data, headings);
 
     final String[] strings = new String[data.length];
@@ -194,7 +196,7 @@ public final class Tables {
    *           null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final String[] data, final String ... headings) {
-    final int rows = Assertions.assertNotNull(data).length / Assertions.assertNotNull(headings).length;
+    final int rows = assertNotNull(data).length / assertNotNull(headings).length;
     final int remainder = data.length % headings.length == 0 ? 0 : 1;
 
     final String[][] columns = new String[headings.length][];
@@ -228,7 +230,7 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final String ... columns) {
-    return printTable(false, Align.CENTER, Align.LEFT, 1, false, columns);
+    return printTable(false, CENTER, LEFT, 1, false, columns);
   }
 
   /**
@@ -249,7 +251,7 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final String ... columns) {
-    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
+    return printTable(false, CENTER, LEFT, cells, firstColumnOneCell, columns);
   }
 
   /**
@@ -295,7 +297,7 @@ public final class Tables {
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final String ... columns) {
     // Split input strings into columns and rows
-    final String[][] strings = new String[Assertions.assertNotNull(columns).length][];
+    final String[][] strings = new String[assertNotNull(columns).length][];
     for (int i = 0; i < columns.length; ++i)
       strings[i] = columns[i] == null ? null : columns[i].split("\n");
 
@@ -317,7 +319,7 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final String[] ... columns) {
-    return printTable(false, Align.CENTER,  Align.LEFT, 1, false, columns);
+    return printTable(false, CENTER,  LEFT, 1, false, columns);
   }
 
   /**
@@ -338,7 +340,7 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final String[] ... columns) {
-    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
+    return printTable(false, CENTER, LEFT, cells, firstColumnOneCell, columns);
   }
 
   /**
@@ -356,7 +358,7 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final Object[] ... columns) {
-    return printTable(false, Align.CENTER, Align.LEFT, 1, false, columns);
+    return printTable(false, CENTER, LEFT, 1, false, columns);
   }
 
   /**
@@ -377,7 +379,7 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final int cells, final boolean firstColumnOneCell, final Object[] ... columns) {
-    return printTable(false, Align.CENTER, Align.LEFT, cells, firstColumnOneCell, columns);
+    return printTable(false, CENTER, LEFT, cells, firstColumnOneCell, columns);
   }
 
   /**
@@ -410,7 +412,7 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] ... columns) {
-    if (Assertions.assertNotNull(columns).getClass().getComponentType() == String[].class)
+    if (assertNotNull(columns).getClass().getComponentType() == String[].class)
       return printTable(borders, alignHeading, align, (String[][])columns);
 
     final String[][] strings = new String[columns.length][];
@@ -465,7 +467,7 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, boolean firstColumnOneCell, final String[] ... columns) {
-    Assertions.assertNotNull(columns);
+    assertNotNull(columns);
     // Moot if cells == 1 and firstColumnOneCell == true
     if (cells == 1)
       firstColumnOneCell = false;
