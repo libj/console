@@ -24,8 +24,7 @@ import org.libj.lang.Strings.Align;
 
 public final class Tables {
   /**
-   * Returns a string with a table layout of the specified array of data
-   * organized into columns with the provided {@code headings}.
+   * Returns a string with a table layout of the specified array of data organized into columns with the provided {@code headings}.
    * <p>
    * This is the equivalent of calling:
    *
@@ -35,18 +34,15 @@ public final class Tables {
    *
    * @param data The array of data.
    * @param headings The headings of the columns.
-   * @return A string with a table layout of the specified data array organized
-   *         into columns with the provided {@code headings}.
-   * @throws IllegalArgumentException If {@code data} or {@code headings} is
-   *           null.
+   * @return A string with a table layout of the specified data array organized into columns with the provided {@code headings}.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final Object[] data, final String ... headings) {
     return printTable(false, CENTER, LEFT, 1, false, data, headings);
   }
 
   /**
-   * Returns a string with a table layout of the specified array of data
-   * organized into columns with the provided {@code headings}.
+   * Returns a string with a table layout of the specified array of data organized into columns with the provided {@code headings}.
    * <p>
    * This is the equivalent of calling:
    *
@@ -55,22 +51,18 @@ public final class Tables {
    * </pre>
    *
    * @param data The array of data.
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param headings The headings of the columns.
-   * @return A string with a table layout of the specified data array organized
-   *         into columns with the provided {@code headings}.
-   * @throws IllegalArgumentException If {@code data} or {@code headings} is
-   *           null.
+   * @return A string with a table layout of the specified data array organized into columns with the provided {@code headings}.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final Object[] data, final int cells, final boolean firstColumnOneCell, final String ... headings) {
     return printTable(false, CENTER, LEFT, cells, firstColumnOneCell, data, headings);
   }
 
   /**
-   * Returns a string with a table layout of the specified array of data
-   * organized into columns with the provided {@code headings}.
+   * Returns a string with a table layout of the specified array of data organized into columns with the provided {@code headings}.
    * <p>
    * This is the equivalent of calling:
    *
@@ -80,18 +72,15 @@ public final class Tables {
    *
    * @param data The array of data.
    * @param headings The headings of the columns.
-   * @return A string with a table layout of the specified data array organized
-   *         into columns with the provided {@code headings}.
-   * @throws IllegalArgumentException If {@code data} or {@code headings} is
-   *           null.
+   * @return A string with a table layout of the specified data array organized into columns with the provided {@code headings}.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final String[] data, final String ... headings) {
     return printTable(false, CENTER, LEFT, 1, false, data, headings);
   }
 
   /**
-   * Returns a string with a table layout of the specified array of data
-   * organized into columns with the provided {@code headings}.
+   * Returns a string with a table layout of the specified array of data organized into columns with the provided {@code headings}.
    * <p>
    * This is the equivalent of calling:
    *
@@ -100,53 +89,43 @@ public final class Tables {
    * </pre>
    *
    * @param data The array of data.
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param headings The headings of the columns.
-   * @return A string with a table layout of the specified data array organized
-   *         into columns with the provided {@code headings}.
-   * @throws IllegalArgumentException If {@code data} or {@code headings} is
-   *           null.
+   * @return A string with a table layout of the specified data array organized into columns with the provided {@code headings}.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final String[] data, final int cells, final boolean firstColumnOneCell, final String ... headings) {
     return printTable(false, CENTER, LEFT, cells, firstColumnOneCell, data, headings);
   }
 
   /**
-   * Returns a string with a table layout of the specified array of data
-   * organized into columns with the provided {@code headings}.
+   * Returns a string with a table layout of the specified array of data organized into columns with the provided {@code headings}.
    *
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param data The array of data.
    * @param headings The headings of the columns.
-   * @return A string with a table layout of the specified data array organized
-   *         into columns with the provided {@code headings}.
-   * @throws IllegalArgumentException If {@code data} or {@code headings} is
-   *           null.
+   * @return A string with a table layout of the specified data array organized into columns with the provided {@code headings}.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final Object[] data, final String ... headings) {
     return printTable(borders, alignHeading, align, 1, false, data, headings);
   }
 
   /**
-   * Returns a string with a table layout of the specified array of data
-   * organized into columns with the provided {@code headings}.
+   * Returns a string with a table layout of the specified array of data organized into columns with the provided {@code headings}.
    *
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param data The array of data.
    * @param headings The headings of the columns.
-   * @return A string with a table layout of the specified data array organized
-   *         into columns with the provided {@code headings}.
-   * @throws IllegalArgumentException If {@code data} or {@code headings} is
-   *           null.
+   * @return A string with a table layout of the specified data array organized into columns with the provided {@code headings}.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final Object[] data, final String ... headings) {
     if (assertNotNull(data).getClass().getComponentType() == String.class)
@@ -161,39 +140,32 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the specified array of data
-   * organized into columns with the provided {@code headings}.
+   * Returns a string with a table layout of the specified array of data organized into columns with the provided {@code headings}.
    *
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
    * @param data The array of data.
    * @param headings The headings of the columns.
-   * @return A string with a table layout of the specified data array organized
-   *         into columns with the provided {@code headings}.
-   * @throws IllegalArgumentException If {@code data} or {@code headings} is
-   *           null.
+   * @return A string with a table layout of the specified data array organized into columns with the provided {@code headings}.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final String[] data, final String ... headings) {
     return printTable(borders, alignHeading, align, 1, false, data, headings);
   }
 
   /**
-   * Returns a string with a table layout of the specified array of data
-   * organized into columns with the provided {@code headings}.
+   * Returns a string with a table layout of the specified array of data organized into columns with the provided {@code headings}.
    *
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param data The array of data.
    * @param headings The headings of the columns.
-   * @return A string with a table layout of the specified data array organized
-   *         into columns with the provided {@code headings}.
-   * @throws IllegalArgumentException If {@code data} or {@code headings} is
-   *           null.
+   * @return A string with a table layout of the specified data array organized into columns with the provided {@code headings}.
+   * @throws IllegalArgumentException If {@code data} or {@code headings} is null.
    */
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final String[] data, final String ... headings) {
     final int rows = assertNotNull(data).length / assertNotNull(headings).length;
@@ -216,8 +188,8 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided array of columns of
-   * new-line-delimited rows, without borders, aligned to the left.
+   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to
+   * the left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -234,8 +206,8 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided array of columns of
-   * new-line-delimited rows, without borders, aligned to the left.
+   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to
+   * the left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -243,8 +215,7 @@ public final class Tables {
    * {@code printTable(false, true, columns)}
    * </pre>
    *
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
@@ -255,8 +226,8 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided array of columns of
-   * new-line-delimited rows, without borders, aligned to the left.
+   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to
+   * the left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -276,8 +247,8 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided array of columns of
-   * new-line-delimited rows, without borders, aligned to the left.
+   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to
+   * the left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -288,8 +259,7 @@ public final class Tables {
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
@@ -305,8 +275,7 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided 2 dimensional array of
-   * columns, without borders, aligned to the left.
+   * Returns a string with a table layout of the provided 2 dimensional array of columns, without borders, aligned to the left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -319,12 +288,11 @@ public final class Tables {
    * @throws IllegalArgumentException If {@code columns} is null.
    */
   public static String printTable(final String[] ... columns) {
-    return printTable(false, CENTER,  LEFT, 1, false, columns);
+    return printTable(false, CENTER, LEFT, 1, false, columns);
   }
 
   /**
-   * Returns a string with a table layout of the provided 2 dimensional array of
-   * columns, without borders, aligned to the left.
+   * Returns a string with a table layout of the provided 2 dimensional array of columns, without borders, aligned to the left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -333,8 +301,7 @@ public final class Tables {
    * </pre>
    *
    * @param columns The 2 dimensional array of columns to print.
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @return A string with a column layout of the provided 2 dimensional array.
    * @throws IllegalArgumentException If {@code columns} is null.
@@ -344,8 +311,7 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided 2 dimensional array of
-   * columns, without borders, aligned to the left.
+   * Returns a string with a table layout of the provided 2 dimensional array of columns, without borders, aligned to the left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -362,8 +328,7 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided 2 dimensional array of
-   * columns, without borders, aligned to the left.
+   * Returns a string with a table layout of the provided 2 dimensional array of columns, without borders, aligned to the left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -371,8 +336,7 @@ public final class Tables {
    * {@code printTable(false, true, columns)}
    * </pre>
    *
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
@@ -383,8 +347,7 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided 2 dimensional array of
-   * columns.
+   * Returns a string with a table layout of the provided 2 dimensional array of columns.
    *
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
@@ -398,14 +361,12 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided 2 dimensional array of
-   * columns.
+   * Returns a string with a table layout of the provided 2 dimensional array of columns.
    *
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
@@ -430,8 +391,7 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided 2 dimensional array of
-   * columns.
+   * Returns a string with a table layout of the provided 2 dimensional array of columns.
    *
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
@@ -453,14 +413,12 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided 2 dimensional array of
-   * columns.
+   * Returns a string with a table layout of the provided 2 dimensional array of columns.
    *
    * @param borders Whether to draw borders.
    * @param alignHeading {@link Align} for the heading.
    * @param align Text alignment to be used for data cells.
-   * @param cells The number of consecutive column elements per cell (except for
-   *          the first and single heading column element).
+   * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
    * @param firstColumnOneCell Whether the first column is to have 1 cell.
    * @param columns The 2 dimensional array of columns to print.
    * @return A string with a column layout of the provided 2 dimensional array.
