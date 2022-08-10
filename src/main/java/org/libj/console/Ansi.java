@@ -155,11 +155,9 @@ public final class Ansi {
   /**
    * Applies the specified {@code intensity} to the provided {@code str}.
    *
-   * @param str The string to which the specified {@code intensity} is to be
-   *          applied.
+   * @param str The string to which the specified {@code intensity} is to be applied.
    * @param intensity The {@link Intensity}.
-   * @return A new string with the specified {@code intensity} applied to the
-   *         provided {@code str}.
+   * @return A new string with the specified {@code intensity} applied to the provided {@code str}.
    */
   public static String apply(final String str, final Intensity intensity) {
     return intensity == null || intensity == Intensity.DEFAULT ? str : apply0(str, intensity, Color.DEFAULT);
@@ -168,27 +166,22 @@ public final class Ansi {
   /**
    * Applies the specified {@code color} to the provided {@code str}.
    *
-   * @param str The string to which the specified {@code color} is to be
-   *          applied.
+   * @param str The string to which the specified {@code color} is to be applied.
    * @param color The {@link Color}.
-   * @return A new string with the specified {@code color} applied to the
-   *         provided {@code str}.
+   * @return A new string with the specified {@code color} applied to the provided {@code str}.
    */
   public static String apply(final String str, final Color color) {
     return color == null || color == Color.DEFAULT ? str : apply0(str, Intensity.DEFAULT, color);
   }
 
   /**
-   * Applies the specified {@code intensity} and {@code color} to the provided
-   * {@code str}. If {@code intensity} or {@code color} is null, the default is
-   * applied instead.
+   * Applies the specified {@code intensity} and {@code color} to the provided {@code str}. If {@code intensity} or {@code color} is
+   * null, the default is applied instead.
    *
-   * @param str The string to which the specified {@code intensity} and
-   *          {@code color} are to be applied.
+   * @param str The string to which the specified {@code intensity} and {@code color} are to be applied.
    * @param intensity The {@link Intensity}.
    * @param color The {@link Color}.
-   * @return A new string with the specified {@code intensity} and {@code color}
-   *         applied to the provided {@code str}.
+   * @return A new string with the specified {@code intensity} and {@code color} applied to the provided {@code str}.
    */
   public static String apply(final String str, Intensity intensity, Color color) {
     if (intensity == null) {
@@ -205,12 +198,10 @@ public final class Ansi {
   }
 
   /**
-   * Accepts a string that may contain ANSI escapes for colors and intensities,
-   * and returns an equivalent string with the same colors and intensities as
-   * HTML+CSS tags.
+   * Accepts a string that may contain ANSI escapes for colors and intensities, and returns an equivalent string with the same
+   * colors and intensities as HTML+CSS tags.
    *
-   * @param str The string whose ANSI-escaped colors and/or intensities are to
-   *          be transformed into HTML+CSS equivalents.
+   * @param str The string whose ANSI-escaped colors and/or intensities are to be transformed into HTML+CSS equivalents.
    * @return The transformed string.
    */
   public static String toHtml(final CharSequence str) {
@@ -221,7 +212,7 @@ public final class Ansi {
     Intensity intensity = null;
     Color color = null;
     boolean hasEndTag = true;
-    for (int i = 0, len = str.length(); i < len; ++i, ch1 = ch0) {
+    for (int i = 0, len = str.length(); i < len; ++i, ch1 = ch0) { // [N]
       ch0 = str.charAt(i);
       if (color != null && intensity != null && ch0 == 'm') {
         if (color == Color.DEFAULT && intensity == Intensity.DEFAULT) {

@@ -24,7 +24,7 @@ import org.junit.Test;
 public class TurtleTest {
   @Test
   public void testGettersWork() {
-    Turtle turtle = new Turtle(1, 1);
+    final Turtle turtle = new Turtle(1, 1);
     assertTrue(turtle.getX() == 0);
     assertTrue(turtle.getY() == 0);
     turtle.move(1, 2);
@@ -34,7 +34,7 @@ public class TurtleTest {
 
   @Test
   public void testAngleWorks() {
-    Turtle turtle = new Turtle(1, 1);
+    final Turtle turtle = new Turtle(1, 1);
     assertTrue(turtle.getAngle() == 0);
     turtle.left(45);
     assertTrue(turtle.getAngle() == -45);
@@ -44,7 +44,7 @@ public class TurtleTest {
 
   @Test
   public void testPenIsDrawing() {
-    Turtle turtle = new Turtle(1, 1);
+    final Turtle turtle = new Turtle(1, 1);
     assertNull(turtle.get(0, 0));
     assertNull(turtle.get(0, 1));
     assertNull(turtle.get(0, 2));

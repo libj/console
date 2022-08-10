@@ -25,9 +25,8 @@ import java.io.UncheckedIOException;
 import org.libj.console.Ansi;
 
 /**
- * This class is used to hold all the BrailleMap objects and uses them as
- * sub-matrices. It is an abstraction of a pixel screen. Methods to interact
- * with those pixels can be found in this class.
+ * This class is used to hold all the BrailleMap objects and uses them as sub-matrices. It is an abstraction of a pixel screen.
+ * Methods to interact with those pixels can be found in this class.
  */
 public class Canvas {
   /** Width of the canvas */
@@ -44,9 +43,8 @@ public class Canvas {
   protected final BrailleMap[] screen;
 
   /**
-   * This constructor takes in a width and height and initializes a flattened
-   * matrix of BrailleMap objects. These objects serve as sub-matrices and
-   * extend the 'pixel' definition that can be displayed on a screen.
+   * This constructor takes in a width and height and initializes a flattened matrix of BrailleMap objects. These objects serve as
+   * sub-matrices and extend the 'pixel' definition that can be displayed on a screen.
    *
    * @param width The desired width of the canvas
    * @param height The desired height of the canvas
@@ -59,16 +57,16 @@ public class Canvas {
     this.pixelHeight = height * 4;
     this.area = width * height;
     this.screen = new BrailleMap[area];
-    for (int i = 0; i < area; ++i)
+    for (int i = 0; i < area; ++i) // [N]
       screen[i] = new BrailleMap();
 
     if (border != null) {
-      for (int x = 0; x < pixelWidth; ++x) {
+      for (int x = 0; x < pixelWidth; ++x) { // [N]
         change(x, 0, border);
         change(x, pixelHeight - 1, border);
       }
 
-      for (int y = 0; y < pixelHeight; ++y) {
+      for (int y = 0; y < pixelHeight; ++y) { // [N]
         change(0, y, border);
         change(pixelWidth - 1, y, border);
       }
@@ -80,11 +78,9 @@ public class Canvas {
   }
 
   /**
-   * This method takes in a horizontal and vertical component and checks to see
-   * if it is in range of the screen matrix. Since braille can be expressed by a
-   * 3 by 2 dot matrix, these bounds are taken to be the upper bound
-   * respectively while negative numbers are taken as the lower bound. These
-   * values are taken into effect by the getWidth and getHeight methods.
+   * This method takes in a horizontal and vertical component and checks to see if it is in range of the screen matrix. Since
+   * braille can be expressed by a 3 by 2 dot matrix, these bounds are taken to be the upper bound respectively while negative
+   * numbers are taken as the lower bound. These values are taken into effect by the getWidth and getHeight methods.
    *
    * @param x Horizontal coordinate
    * @param y Vertical coordinate
@@ -95,9 +91,8 @@ public class Canvas {
   }
 
   /**
-   * This method returns the screen width in the true pixel definition. The user
-   * supplied width is multiplied by 2 because a braille dot matrix has 2
-   * columns.
+   * This method returns the screen width in the true pixel definition. The user supplied width is multiplied by 2 because a braille
+   * dot matrix has 2 columns.
    *
    * @return Integer True pixel width
    */
@@ -106,9 +101,8 @@ public class Canvas {
   }
 
   /**
-   * This method returns the screen height in the true pixel definition. The
-   * user supplied height is multiplied by 4 because a braille dot matrix has 4
-   * rows.
+   * This method returns the screen height in the true pixel definition. The user supplied height is multiplied by 4 because a
+   * braille dot matrix has 4 rows.
    *
    * @return Integer True pixel width
    */
@@ -117,9 +111,8 @@ public class Canvas {
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinate and returns the
-   * value of the activation of said pixel. If true, the pixel is turned on,
-   * otherwise it is off.
+   * This method takes in a horizontal and vertical coordinate and returns the value of the activation of said pixel. If true, the
+   * pixel is turned on, otherwise it is off.
    *
    * @param x Horizontal coordinate of pixel
    * @param y Vertical coordinate of pixel
@@ -132,9 +125,8 @@ public class Canvas {
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinate as well as an
-   * activation state. It then applies that activation to said pixel that lives
-   * in the passed coordinates.
+   * This method takes in a horizontal and vertical coordinate as well as an activation state. It then applies that activation to
+   * said pixel that lives in the passed coordinates.
    *
    * @param x Horizontal coordinate of pixel
    * @param y Vertical coordinate of pixel
@@ -147,8 +139,7 @@ public class Canvas {
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinate, it then
-   * activates said pixel by setting it's value to true.
+   * This method takes in a horizontal and vertical coordinate, it then activates said pixel by setting it's value to true.
    *
    * @param x Horizontal coordinate of pixel
    * @param y Vertical coordinate of pixel
@@ -162,8 +153,7 @@ public class Canvas {
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinate, it then
-   * deactivates said pixel by setting it's value to false.
+   * This method takes in a horizontal and vertical coordinate, it then deactivates said pixel by setting it's value to false.
    *
    * @param x Horizontal coordinate of pixel
    * @param y Vertical coordinate of pixel
@@ -173,20 +163,18 @@ public class Canvas {
   }
 
   /**
-   * This method traverses through all the BrailleMap objects that is stored to
-   * make up the screen, it then resets all the values in those sub-matrices.
+   * This method traverses through all the BrailleMap objects that is stored to make up the screen, it then resets all the values in
+   * those sub-matrices.
    */
   public void clear() {
-    for (int i = 0; i < area; ++i) {
+    for (int i = 0; i < area; ++i) { // [N]
       screen[i].reset();
     }
   }
 
   /**
-   * This method traverses through all the BrailleMap objects and renders out
-   * the sub-matrices by asking for the object's string value with the getString
-   * method. It then prints them all out to the screen by using the overloaded
-   * corresponding render method.
+   * This method traverses through all the BrailleMap objects and renders out the sub-matrices by asking for the object's string
+   * value with the getString method. It then prints them all out to the screen by using the overloaded corresponding render method.
    */
   public void render() {
     try {
@@ -198,17 +186,16 @@ public class Canvas {
   }
 
   /**
-   * This method traverses through all the BrailleMap objects and renders out
-   * the sub-matrices by asking for the object's string value with the getString
-   * method. It then writes said output to the specified ByteArrayOutputStream.
-   * This stream is then returned back to caller for method chaining.
+   * This method traverses through all the BrailleMap objects and renders out the sub-matrices by asking for the object's string
+   * value with the getString method. It then writes said output to the specified ByteArrayOutputStream. This stream is then
+   * returned back to caller for method chaining.
    *
    * @param out Stream to write to
    * @return Same stream that was passed in
    * @throws IOException ByteArrayOutputStream throws exception
    */
   public OutputStream render(final OutputStream out) throws IOException {
-    for (int i = 0; i < area; ++i) {
+    for (int i = 0; i < area; ++i) { // [N]
       out.write(screen[i].toString().getBytes());
       if (i % width == width - 1)
         out.write('\n');
@@ -221,7 +208,7 @@ public class Canvas {
   public String toString() {
     try {
       final ByteArrayOutputStream writer = new ByteArrayOutputStream();
-      for (int i = 0; i < area; ++i) {
+      for (int i = 0; i < area; ++i) { // [N]
         writer.write(screen[i].toString().getBytes());
         if (i % width == width - 1)
           writer.write('\n');

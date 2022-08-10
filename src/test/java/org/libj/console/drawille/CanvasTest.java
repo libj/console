@@ -49,9 +49,9 @@ public class CanvasTest {
 
   @Test
   public void testDimensionGetterWorks() {
-    Canvas c1 = new Canvas(10, 30);
-    Canvas c2 = new Canvas(0, 0);
-    Canvas c3 = new Canvas(2, 5);
+    final Canvas c1 = new Canvas(10, 30);
+    final Canvas c2 = new Canvas(0, 0);
+    final Canvas c3 = new Canvas(2, 5);
     assertTrue(c1.getWidth() == 10 * 2);
     assertTrue(c1.getHeight() == 30 * 4);
     assertTrue(c2.getWidth() == 0 * 2);
@@ -62,7 +62,7 @@ public class CanvasTest {
 
   @Test
   public void testGetterWorks() {
-    Canvas canvas = new Canvas(1, 1);
+    final Canvas canvas = new Canvas(1, 1);
     assertNull(canvas.get(0, 0));
     assertNull(canvas.get(1, 1));
     canvas.set(0, 0);
@@ -73,7 +73,7 @@ public class CanvasTest {
 
   @Test
   public void testChangeWorks() {
-    Canvas canvas = new Canvas(1, 1);
+    final Canvas canvas = new Canvas(1, 1);
     assertNull(canvas.get(0, 0));
     assertNull(canvas.get(1, 1));
     canvas.change(0, 0, Ansi.Color.DEFAULT);
@@ -88,7 +88,7 @@ public class CanvasTest {
 
   @Test
   public void testSetWorks() {
-    Canvas canvas = new Canvas(1, 1);
+    final Canvas canvas = new Canvas(1, 1);
     assertNull(canvas.get(0, 0));
     assertNull(canvas.get(1, 1));
     canvas.set(0, 0);
@@ -99,7 +99,7 @@ public class CanvasTest {
 
   @Test
   public void testUnsetWorks() {
-    Canvas canvas = new Canvas(1, 1);
+    final Canvas canvas = new Canvas(1, 1);
     assertNull(canvas.get(0, 0));
     assertNull(canvas.get(1, 1));
     canvas.set(0, 0);
@@ -115,19 +115,19 @@ public class CanvasTest {
   @Test
   public void testRenderOverload() {
     try {
-      ByteArrayOutputStream output = new ByteArrayOutputStream();
-      Canvas canvas = new Canvas(1, 2);
+      final ByteArrayOutputStream output = new ByteArrayOutputStream();
+      final Canvas canvas = new Canvas(1, 2);
       canvas.set(1, 1);
       canvas.set(1, 2);
       String result = canvas.render(output).toString().replace("\n", "");
 //      assertTrue(result.equals("\u2830\u2800"));
     }
-    catch (Exception e) {
+    catch (final Exception e) {
       assertTrue(false);
     }
 
-    Canvas canvas = new Canvas(75, 6);
-    for (int x = 0; x <= canvas.getWidth() * 8; x++) {
+    final Canvas canvas = new Canvas(75, 6);
+    for (int x = 0, x$ = canvas.getWidth() * 8; x <= x$; x++) { // [N]
       canvas.set(x / 10, (int)Math.round(10 + Math.cos(x * Math.PI / 180) * 10), Ansi.Color.RED);
       canvas.set(x / 10, (int)Math.round(10 + Math.sin(x * Math.PI / 180) * 10), Ansi.Color.CYAN);
     }

@@ -33,8 +33,8 @@ public class TablesTest {
     final ArrayList<Object> data = new ArrayList<>();
     columns1x[0] = new String[] {"Latitude", "Miles", "Feet", "Meters"};
     rows1x[0] = columns1x[0][0] + "\n" + columns1x[0][1] + "\n" + columns1x[0][2] + "\n" + columns1x[0][3];
-    for (int r = 0; r < 3; ++r) {
-      for (int i = 1, j = -1; i < columns1x.length; ++i, j = -1) {
+    for (int r = 0; r < 3; ++r) { // [N]
+      for (int i = 1, j = -1; i < columns1x.length; ++i, j = -1) { // [A]
         if ((r + 1) * Math.random() < nullThreshold)
           continue;
 
@@ -59,7 +59,7 @@ public class TablesTest {
         }
       }
 
-      for (int i = 0; i < columns1x.length; ++i) {
+      for (int i = 0; i < columns1x.length; ++i) { // [A]
         final String[] column = columns1x[i];
         if (column != null) {
           final String[] column2x = columns2x[i] = new String[1 + (column.length - 1) * 2];
@@ -71,17 +71,17 @@ public class TablesTest {
 
       final Object[] array1x = data.toArray();
       final Object[] array2x = new Object[array1x.length * 2];
-      for (int i = 0; i < array1x.length; ++i)
+      for (int i = 0; i < array1x.length; ++i) // [A]
         array2x[i * 2] = array2x[i * 2 + 1] = array1x[i];
 
       final String[] rows2x = new String[rows1x.length * 2];
-      for (int i = 0; i < rows1x.length; ++i)
+      for (int i = 0; i < rows1x.length; ++i) // [A]
         rows2x[i * 2] = rows2x[i * 2 + 1] = rows1x[i];
 
       final Object[][] arrays = new Object[][] {array1x, array2x};
       final String[][][] columns = new String[][][] {columns1x, columns2x};
       final String[][] rows = new String[][] {rows1x, rows2x};
-      for (int i = 0; i < arrays.length; ++i) {
+      for (int i = 0; i < arrays.length; ++i) { // [A]
         final Object[] array = arrays[i];
         final String[][] column = columns[i];
         final String[] row = rows[i];

@@ -29,20 +29,20 @@ public class AnsiTest {
 
   @Test
   public void testColor() {
-    for (final Color color : Color.values())
+    for (final Color color : Color.values()) // [A]
       System.out.println("C[" + color + "] " + test(color.apply(str)));
   }
 
   @Test
   public void testIntensity() {
-    for (final Intensity intensity : Intensity.values())
+    for (final Intensity intensity : Intensity.values()) // [A]
       System.out.println("I[" + intensity + "] " + test(intensity.apply(str)));
   }
 
   @Test
   public void testColorIntensity() {
-    for (final Intensity intensity : Intensity.values())
-      for (final Color color : Color.values())
+    for (final Intensity intensity : Intensity.values()) // [A]
+      for (final Color color : Color.values()) // [A]
         System.out.println("I[" + intensity + "] C[" + color + "] " + test(Ansi.apply(str, intensity, color)));
   }
 }

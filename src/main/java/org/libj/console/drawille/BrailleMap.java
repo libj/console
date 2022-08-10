@@ -22,10 +22,8 @@ import java.util.Arrays;
 import org.libj.console.Ansi;
 
 /**
- * This class stores a 4 by 2 pixel matrix that is eventually translated into a
- * braille character. This method abstracts away all the calculations that is
- * needed to transform a matrix into a braille character. This class is meant to
- * be used as a sub-matrix.
+ * This class stores a 4 by 2 pixel matrix that is eventually translated into a braille character. This method abstracts away all
+ * the calculations that is needed to transform a matrix into a braille character. This class is meant to be used as a sub-matrix.
  */
 public class BrailleMap {
   /** Braille characters unicode offset */
@@ -38,8 +36,7 @@ public class BrailleMap {
   protected Ansi.Color[] map;
 
   /**
-   * This constructor initializes the pixel map matrix and resets the matrix by
-   * initializing the values with false.
+   * This constructor initializes the pixel map matrix and resets the matrix by initializing the values with false.
    */
   public BrailleMap() {
     this.map = new Ansi.Color[8];
@@ -47,87 +44,81 @@ public class BrailleMap {
   }
 
   /**
-   * This method takes in a horizontal and vertical component and checks to see
-   * if it is in range of the pixel matrix. Since braille can be expressed by a
-   * 4 by 2 dot matrix, these bounds are taken to be the upper bound
-   * respectively while negative numbers are taken as the lower bound.
+   * This method takes in a horizontal and vertical component and checks to see if it is in range of the pixel matrix. Since braille
+   * can be expressed by a 4 by 2 dot matrix, these bounds are taken to be the upper bound respectively while negative numbers are
+   * taken as the lower bound.
    *
    * @param x Horizontal coordinate
    * @param y Vertical coordinate
    */
-  protected void checkRange(int x, int y) {
-    if (x < 0 || y < 0 || x > 1 || y > 3) {
+  protected void checkRange(final int x, final int y) {
+    if (x < 0 || y < 0 || x > 1 || y > 3)
       throw new DrawilleException(x, y);
-    }
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinates alongside a
-   * matrix entry value. It then sets said value into the pixel matrix based on
-   * the passed coordinates
+   * This method takes in a horizontal and vertical coordinates alongside a matrix entry value. It then sets said value into the
+   * pixel matrix based on the passed coordinates
    *
    * @param x Horizontal coordinate
    * @param y Vertical coordinate
    * @param color The color to set matrix entry to
    */
-  public void change(int x, int y, Ansi.Color color) {
-    this.checkRange(x, y);
-    this.map[y * 2 + x] = color;
+  public void change(final int x, final int y, final Ansi.Color color) {
+    checkRange(x, y);
+    map[y * 2 + x] = color;
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinates and it returns
-   * the value that is saved in the pixel matrix based on the passed
-   * coordinates.
+   * This method takes in a horizontal and vertical coordinates and it returns the value that is saved in the pixel matrix based on
+   * the passed coordinates.
    *
    * @param x Horizontal coordinate
    * @param y Vertical coordinate
    * @return Boolean Saved state based on coordinates
    */
-  public Ansi.Color get(int x, int y) {
-    this.checkRange(x, y);
-    return this.map[y * 2 + x];
+  public Ansi.Color get(final int x, final int y) {
+    checkRange(x, y);
+    return map[y * 2 + x];
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinates, it then
-   * activates the value into the pixel matrix based on the passed coordinates.
+   * This method takes in a horizontal and vertical coordinates, it then activates the value into the pixel matrix based on the
+   * passed coordinates.
    *
    * @param x Horizontal coordinate
    * @param y Vertical coordinate
    */
-  public void set(int x, int y) {
-    this.set(x, y, Ansi.Color.DEFAULT);
+  public void set(final int x, final int y) {
+    set(x, y, Ansi.Color.DEFAULT);
   }
 
-  public void set(int x, int y, final Ansi.Color color) {
-    this.change(x, y, color);
+  public void set(final int x, final int y, final Ansi.Color color) {
+    change(x, y, color);
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinates, it then
-   * deactivates the value into the pixel matrix based on the passed
-   * coordinates.
+   * This method takes in a horizontal and vertical coordinates, it then deactivates the value into the pixel matrix based on the
+   * passed coordinates.
    *
    * @param x Horizontal coordinate
    * @param y Vertical coordinate
    */
-  public void unset(int x, int y) {
-    this.change(x, y, null);
+  public void unset(final int x, final int y) {
+    change(x, y, null);
   }
 
   /**
-   * This method traverses through the pixel map matrix and deactivates all the
-   * pixels in the matrix by setting all the values to false.
+   * This method traverses through the pixel map matrix and deactivates all the pixels in the matrix by setting all the values to
+   * false.
    */
   public void reset() {
-    Arrays.fill(this.map, null);
+    Arrays.fill(map, null);
   }
 
   /**
-   * This method traverses through the pixel map matrix and transforms the
-   * matrix into a braille character. The resulting character is returned in
-   * string value.
+   * This method traverses through the pixel map matrix and transforms the matrix into a braille character. The resulting character
+   * is returned in string value.
    *
    * @return String Pixel matrix as braille character
    */
@@ -135,8 +126,8 @@ public class BrailleMap {
   public String toString() {
     int decimal = BrailleMap.UNICODE_OFFSET;
     Ansi.Color color = null;
-    for (int i = 0; i < 8; ++i) {
-      if (this.map[i] != null) {
+    for (int i = 0; i < 8; ++i) { // [N]
+      if (map[i] != null) {
         color = map[i];
         decimal += BrailleMap.TRANSFORM_MATRIX[i];
       }
