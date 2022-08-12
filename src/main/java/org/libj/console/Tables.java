@@ -29,7 +29,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, data, headings)}
+   * {@code
+   * printTable(false, true, data, headings)
+   * }
    * </pre>
    *
    * @param data The array of data.
@@ -47,7 +49,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, data, headings)}
+   * {@code
+   * printTable(false, true, data, headings)
+   * }
    * </pre>
    *
    * @param data The array of data.
@@ -67,7 +71,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, data, headings)}
+   * {@code
+   * printTable(false, true, data, headings)
+   * }
    * </pre>
    *
    * @param data The array of data.
@@ -85,7 +91,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, data, headings)}
+   * {@code
+   * printTable(false, true, data, headings)
+   * }
    * </pre>
    *
    * @param data The array of data.
@@ -132,7 +140,7 @@ public final class Tables {
       return printTable(borders, alignHeading, align, cells, firstColumnOneCell, (String[])data, headings);
 
     final String[] strings = new String[data.length];
-    for (int i = 0; i < data.length; ++i) // [A]
+    for (int i = 0, i$ = data.length; i < i$; ++i) // [A]
       if (data[i] != null)
         strings[i] = String.valueOf(data[i]);
 
@@ -172,10 +180,10 @@ public final class Tables {
     final int remainder = data.length % headings.length == 0 ? 0 : 1;
 
     final String[][] columns = new String[headings.length][];
-    for (int i = 0; i < headings.length; ++i) { // [A]
+    for (int i = 0, i$ = headings.length; i < i$; ++i) { // [A]
       final String[] column = columns[i] = new String[1 + (rows + remainder) * cells];
       column[0] = headings[i];
-      for (int j = 1; j < column.length; j += cells) { // [N]
+      for (int j = 1, j$ = column.length; j < j$; j += cells) { // [N]
         for (int k = 0; k < cells; ++k) { // [N]
           final int l = i * headings.length * cells + (j - 1) + k;
           if (l < data.length)
@@ -194,7 +202,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, columns)}
+   * {@code
+   * printTable(false, true, columns)
+   * }
    * </pre>
    *
    * @param columns The 2 dimensional array of columns to print.
@@ -212,7 +222,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, columns)}
+   * {@code
+   * printTable(false, true, columns)
+   * }
    * </pre>
    *
    * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
@@ -232,7 +244,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, columns)}
+   * {@code
+   * printTable(false, true, columns)
+   * }
    * </pre>
    *
    * @param borders Whether to draw borders.
@@ -253,7 +267,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, columns)}
+   * {@code
+   * printTable(false, true, columns)
+   * }
    * </pre>
    *
    * @param borders Whether to draw borders.
@@ -268,7 +284,7 @@ public final class Tables {
   public static String printTable(final boolean borders, final Align alignHeading, final Align align, final int cells, final boolean firstColumnOneCell, final String ... columns) {
     // Split input strings into columns and rows
     final String[][] strings = new String[assertNotNull(columns).length][];
-    for (int i = 0; i < columns.length; ++i) // [A]
+    for (int i = 0, i$ = columns.length; i < i$; ++i) // [A]
       strings[i] = columns[i] == null ? null : columns[i].split("\n");
 
     return printTable(borders, alignHeading, align, cells, firstColumnOneCell, (Object[][])strings);
@@ -280,7 +296,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, columns)}
+   * {@code
+   * printTable(false, true, columns)
+   * }
    * </pre>
    *
    * @param columns The 2 dimensional array of columns to print.
@@ -297,7 +315,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, columns)}
+   * {@code
+   * printTable(false, true, columns)
+   * }
    * </pre>
    *
    * @param columns The 2 dimensional array of columns to print.
@@ -316,7 +336,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, columns)}
+   * {@code
+   * printTable(false, true, columns)
+   * }
    * </pre>
    *
    * @param columns The 2 dimensional array of columns to print.
@@ -333,7 +355,9 @@ public final class Tables {
    * This is the equivalent of calling:
    *
    * <pre>
-   * {@code printTable(false, true, columns)}
+   * {@code
+   * printTable(false, true, columns)
+   * }
    * </pre>
    *
    * @param cells The number of consecutive column elements per cell (except for the first and single heading column element).
@@ -377,11 +401,11 @@ public final class Tables {
       return printTable(borders, alignHeading, align, (String[][])columns);
 
     final String[][] strings = new String[columns.length][];
-    for (int i = 0; i < strings.length; ++i) { // [A]
+    for (int i = 0, i$ = strings.length; i < i$; ++i) { // [A]
       final Object[] column = columns[i];
       if (column != null) {
         final String[] string = strings[i] = new String[column.length];
-        for (int j = 0; j < column.length; ++j) // [A]
+        for (int j = 0, j$ = column.length; j < j$; ++j) // [A]
           if (column[j] != null)
             string[j] = String.valueOf(column[j]);
       }
@@ -406,7 +430,7 @@ public final class Tables {
 
   private static int maxLengthPrintable(final String[] strings) {
     int len = 0;
-    for (int i = 0; i < strings.length; ++i) // [A]
+    for (int i = 0, i$ = strings.length; i < i$; ++i) // [A]
       len = Math.max(len, Strings.lengthPrintable(strings[i]));
 
     return len;
@@ -432,7 +456,7 @@ public final class Tables {
 
     // Count the total number of rows
     int numRows = 0;
-    for (int c = 0; c < columns.length; ++c) // [A]
+    for (int c = 0, c$ = columns.length; c < c$; ++c) // [A]
       if (columns[c] != null)
         numRows = Math.max(numRows, firstColumnOneCell ? columns[c].length : columns[c].length / cells);
 
@@ -466,7 +490,7 @@ public final class Tables {
 
         // Following rows have `cells` number of cells
         final int inc = c == 0 && firstColumnOneCell ? 1 : cells;
-        for (int r = 1; r < rows.length; r += inc, ++h) { // [A]
+        for (int r = 1, r$ = rows.length; r < r$; r += inc, ++h) { // [A]
           for (int i = 0; i < inc; ++i) { // [A]
             final int width = widths[w + i];
             final int j = i + r;
@@ -486,7 +510,7 @@ public final class Tables {
     // Print the top border
     if (borders) {
       builder.append('╔');
-      for (int c = 0; c < columns.length; ++c) { // [A]
+      for (int c = 0, c$ = columns.length; c < c$; ++c) { // [A]
         final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
         if (c > 0)
           builder.append('╦');
@@ -512,7 +536,7 @@ public final class Tables {
       if (borders)
         builder.append("\n║ ");
 
-      for (int c = 0; c < columns.length; ++c) { // [A]
+      for (int c = 0, c$ = columns.length; c < c$; ++c) { // [A]
         final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
         rows = columns[c];
         String row = rows == null || rows[0] == null ? "" : rows[0];
@@ -542,7 +566,7 @@ public final class Tables {
     // Print the middle border
     if (borders) {
       builder.append("\n╠");
-      for (int c = 0; c < columns.length; ++c) { // [A]
+      for (int c = 0, c$ = columns.length; c < c$; ++c) { // [A]
         final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
         if (c > 0)
           builder.append('╬');
@@ -570,7 +594,7 @@ public final class Tables {
       if (borders)
         builder.append("║ ");
 
-      for (int c = 0; c < columns.length; ++c) { // [A]
+      for (int c = 0, c$ = columns.length; c < c$; ++c) { // [A]
         final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
         final int i = r > 1 && c == 0 && firstColumnOneCell ? (r + 1) / 2 : r;
         rows = columns[c];
@@ -595,7 +619,7 @@ public final class Tables {
     // Print the bottom border
     if (borders) {
       builder.append("\n╚");
-      for (int c = 0; c < columns.length; ++c) { // [A]
+      for (int c = 0, c$ = columns.length; c < c$; ++c) { // [A]
         final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
         if (c > 0)
           builder.append('╩');

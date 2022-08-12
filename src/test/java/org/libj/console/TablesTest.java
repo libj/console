@@ -59,7 +59,7 @@ public class TablesTest {
         }
       }
 
-      for (int i = 0; i < columns1x.length; ++i) { // [A]
+      for (int i = 0, i$ = columns1x.length; i < i$; ++i) { // [A]
         final String[] column = columns1x[i];
         if (column != null) {
           final String[] column2x = columns2x[i] = new String[1 + (column.length - 1) * 2];
@@ -71,17 +71,17 @@ public class TablesTest {
 
       final Object[] array1x = data.toArray();
       final Object[] array2x = new Object[array1x.length * 2];
-      for (int i = 0; i < array1x.length; ++i) // [A]
+      for (int i = 0, i$ = array1x.length; i < i$; ++i) // [A]
         array2x[i * 2] = array2x[i * 2 + 1] = array1x[i];
 
       final String[] rows2x = new String[rows1x.length * 2];
-      for (int i = 0; i < rows1x.length; ++i) // [A]
+      for (int i = 0, i$ = rows1x.length; i < i$; ++i) // [A]
         rows2x[i * 2] = rows2x[i * 2 + 1] = rows1x[i];
 
       final Object[][] arrays = new Object[][] {array1x, array2x};
       final String[][][] columns = new String[][][] {columns1x, columns2x};
       final String[][] rows = new String[][] {rows1x, rows2x};
-      for (int i = 0; i < arrays.length; ++i) { // [A]
+      for (int i = 0, i$ = arrays.length; i < i$; ++i) { // [A]
         final Object[] array = arrays[i];
         final String[][] column = columns[i];
         final String[] row = rows[i];

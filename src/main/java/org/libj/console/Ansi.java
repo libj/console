@@ -212,7 +212,7 @@ public final class Ansi {
     Intensity intensity = null;
     Color color = null;
     boolean hasEndTag = true;
-    for (int i = 0, len = str.length(); i < len; ++i, ch1 = ch0) { // [N]
+    for (int i = 0, i$ = str.length(); i < i$; ++i, ch1 = ch0) { // [N]
       ch0 = str.charAt(i);
       if (color != null && intensity != null && ch0 == 'm') {
         if (color == Color.DEFAULT && intensity == Intensity.DEFAULT) {
