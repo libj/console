@@ -18,16 +18,14 @@
 package org.libj.console.drawille;
 
 /**
- * This class inherits from the RuntimeException class. It is meant to be thrown
- * whenever an out of range value is passed to the Canvas and BrailleMap class.
- * The message is statically defined in this class and the caller only has to
- * pass in the out of bounds (x,y) value pairs.
+ * This class inherits from the RuntimeException class. It is meant to be thrown whenever an out of range value is passed to the
+ * Canvas and BrailleMap class. The message is statically defined in this class and the caller only has to pass in the out of bounds
+ * (x,y) value pairs.
  */
 public class DrawilleException extends RuntimeException {
   /**
-   * This constructor takes in an (x,y) value pair and displays those pairs to
-   * the user. These values are defined to be out of range by the caller,
-   * therefore the caller will be alerted.
+   * This constructor takes in an (x,y) value pair and displays those pairs to the user. These values are defined to be out of range
+   * by the caller, therefore the caller will be alerted.
    *
    * @param x The passed horizontal coordinate
    * @param y The passed vertical coordinate
