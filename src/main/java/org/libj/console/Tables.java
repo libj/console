@@ -285,7 +285,7 @@ public final class Tables {
     // Split input strings into columns and rows
     final String[][] strings = new String[assertNotNull(columns).length][];
     for (int i = 0, i$ = columns.length; i < i$; ++i) // [A]
-      strings[i] = columns[i] == null ? null : columns[i].split("\n");
+      strings[i] = columns[i] == null ? null : Strings.split(columns[i], '\n');
 
     return printTable(borders, alignHeading, align, cells, firstColumnOneCell, (Object[][])strings);
   }
@@ -474,7 +474,7 @@ public final class Tables {
       if (rows != null && rows.length > 0) {
         maxRows = Math.max(maxRows, rows.length);
         // First row is the heading, which has only 1 cell
-        String[] multiline = rows[0] == null ? Strings.EMPTY_ARRAY : rows[0].split("\n");
+        String[] multiline = rows[0] == null ? Strings.EMPTY_ARRAY : Strings.split(rows[0], '\n');
         heights[h] = Math.max(heights[h++], multiline.length);
         final int headingWidth = rows[0] == null ? 0 : maxLengthPrintable(multiline);
         for (int i = 0; i < cells; ++i) { // [A]
@@ -495,7 +495,7 @@ public final class Tables {
             final int width = widths[w + i];
             final int j = i + r;
             if (j < rows.length && rows[j] != null) {
-              multiline = rows[j].split("\n");
+              multiline = Strings.split(rows[j], '\n');
               heights[h] = Math.max(heights[h], multiline.length);
               widths[w + i] = Math.max(width, maxLengthPrintable(multiline));
             }
@@ -541,7 +541,7 @@ public final class Tables {
         rows = columns[c];
         String row = rows == null || rows[0] == null ? "" : rows[0];
         if (heights[0] != 1) {
-          final String[] multiline = row.split("\n");
+          final String[] multiline = Strings.split(row, '\n');
           final int m = h - (heights[0] - multiline.length);
           row = -1 < m && m < multiline.length ? multiline[m] : "";
         }
