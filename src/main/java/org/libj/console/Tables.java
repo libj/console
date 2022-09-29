@@ -539,7 +539,7 @@ public final class Tables {
       for (int c = 0, c$ = columns.length; c < c$; ++c) { // [A]
         final int w = c * cells - (c > 0 && firstColumnOneCell ? 1 : 0);
         rows = columns[c];
-        String row = rows == null || rows[0] == null ? "" : rows[0];
+        String row = rows == null || rows.length == 0 || rows[0] == null ? "" : rows[0];
         if (heights[0] != 1) {
           final String[] multiline = Strings.split(row, '\n');
           final int m = h - (heights[0] - multiline.length);
