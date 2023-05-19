@@ -27,10 +27,10 @@ import org.libj.console.Ansi;
  */
 public class BrailleMap {
   /** Braille characters unicode offset */
-  protected final static int UNICODE_OFFSET = 10240;
+  protected static final int UNICODE_OFFSET = 10240;
 
   /** Transformation matrix for braille */
-  protected final static int[] TRANSFORM_MATRIX = {1, 8, 2, 16, 4, 32, 64, 128};
+  protected static final int[] TRANSFORM_MATRIX = {1, 8, 2, 16, 4, 32, 64, 128};
 
   /** Flattened pixel map matrix (4 by 2) */
   protected Ansi.Color[] map;
