@@ -43,7 +43,7 @@ public class AnsiTest {
 
   @Test
   public void testColorIntensity() {
-    for (final Intensity intensity : intensities) {
+    for (final Intensity intensity : intensities) { // [A]
       for (final Color color : colors) // [A]
         System.out.println("I[" + intensity + "] C[" + color + "] " + test(Ansi.apply(str, intensity, color)));
     }

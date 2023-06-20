@@ -78,9 +78,9 @@ public class TablesTest {
       for (int i = 0, i$ = rows1x.length; i < i$; ++i) // [A]
         rows2x[i * 2] = rows2x[i * 2 + 1] = rows1x[i];
 
-      final Object[][] arrays = new Object[][] {array1x, array2x};
-      final String[][][] columns = new String[][][] {columns1x, columns2x};
-      final String[][] rows = new String[][] {rows1x, rows2x};
+      final Object[][] arrays = {array1x, array2x};
+      final String[][][] columns = {columns1x, columns2x};
+      final String[][] rows = {rows1x, rows2x};
       for (int i = 0, i$ = arrays.length; i < i$; ++i) { // [A]
         final Object[] array = arrays[i];
         final String[][] column = columns[i];
