@@ -24,8 +24,8 @@ import java.util.function.Function;
  * Class for utilities related to ANSI standards.
  */
 public final class Ansi {
-  private static Color[] colors = new Color[10];
-  private static Intensity[][] intensities = new Intensity[5][7];
+  private static final Color[] colors = new Color[10];
+  private static final Intensity[][] intensities = new Intensity[5][7];
 
   /**
    * Enum of ANSI color codes.
@@ -68,7 +68,7 @@ public final class Ansi {
       return Ansi.apply0(t, Intensity.DEFAULT, this);
     }
 
-    private static Comparator<Object> comparator = new Comparator<Object>() {
+    private static final Comparator<Object> comparator = new Comparator<Object>() {
       @Override
       public int compare(final Object o1, final Object o2) {
         final String n1 = o1 instanceof Color ? ((Color)o1).lowerCase : (String)o1;
@@ -128,7 +128,7 @@ public final class Ansi {
       return Ansi.apply0(t, this, Color.DEFAULT);
     }
 
-    private static Comparator<Object> comparator = new Comparator<Object>() {
+    private static final Comparator<Object> comparator = new Comparator<Object>() {
       @Override
       public int compare(final Object o1, final Object o2) {
         final String n1 = o1 instanceof Intensity ? ((Intensity)o1).lowerCase : (String)o1;
