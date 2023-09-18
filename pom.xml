@@ -22,10 +22,10 @@
   <parent>
     <groupId>org.libj</groupId>
     <artifactId>libj</artifactId>
-    <version>0.9.8-SNAPSHOT</version>
+    <version>0.9.8</version>
   </parent>
   <artifactId>console</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.0</version>
   <name>LibJ Console</name>
   <description>
     Utilities applicable to the console.
@@ -34,7 +34,7 @@
     <dependency>
       <groupId>org.libj</groupId>
       <artifactId>lang</artifactId>
-      <version>0.8.0-SNAPSHOT</version>
+      <version>0.8.0</version>
     </dependency>
   </dependencies>
 </project>
