@@ -195,8 +195,8 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to
-   * the left.
+   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to the
+   * left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -215,8 +215,8 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to
-   * the left.
+   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to the
+   * left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -237,8 +237,8 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to
-   * the left.
+   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to the
+   * left.
    * <p>
    * This is the equivalent of calling:
    *
@@ -260,8 +260,8 @@ public final class Tables {
   }
 
   /**
-   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to
-   * the left.
+   * Returns a string with a table layout of the provided array of columns of new-line-delimited rows, without borders, aligned to the
+   * left.
    * <p>
    * This is the equivalent of calling:
    *

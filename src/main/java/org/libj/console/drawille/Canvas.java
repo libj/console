@@ -46,8 +46,8 @@ public class Canvas {
    * This constructor takes in a width and height and initializes a flattened matrix of BrailleMap objects. These objects serve as
    * sub-matrices and extend the 'pixel' definition that can be displayed on a screen.
    *
-   * @param width The desired width of the canvas
-   * @param height The desired height of the canvas
+   * @param width The desired width of the canvas.
+   * @param height The desired height of the canvas.
    * @param border Border color.
    */
   public Canvas(final int width, final int height, final Ansi.Color border) {
@@ -78,9 +78,9 @@ public class Canvas {
   }
 
   /**
-   * This method takes in a horizontal and vertical component and checks to see if it is in range of the screen matrix. Since
-   * braille can be expressed by a 3 by 2 dot matrix, these bounds are taken to be the upper bound respectively while negative
-   * numbers are taken as the lower bound. These values are taken into effect by the getWidth and getHeight methods.
+   * This method takes in a horizontal and vertical component and checks to see if it is in range of the screen matrix. Since braille
+   * can be expressed by a 3 by 2 dot matrix, these bounds are taken to be the upper bound respectively while negative numbers are
+   * taken as the lower bound. These values are taken into effect by the getWidth and getHeight methods.
    *
    * @param x Horizontal coordinate
    * @param y Vertical coordinate
@@ -94,17 +94,17 @@ public class Canvas {
    * This method returns the screen width in the true pixel definition. The user supplied width is multiplied by 2 because a braille
    * dot matrix has 2 columns.
    *
-   * @return Integer True pixel width
+   * @return Integer True pixel width.
    */
   public int getWidth() {
     return pixelWidth;
   }
 
   /**
-   * This method returns the screen height in the true pixel definition. The user supplied height is multiplied by 4 because a
-   * braille dot matrix has 4 rows.
+   * This method returns the screen height in the true pixel definition. The user supplied height is multiplied by 4 because a braille
+   * dot matrix has 4 rows.
    *
-   * @return Integer True pixel width
+   * @return Integer True pixel width.
    */
   public int getHeight() {
     return pixelHeight;
@@ -114,9 +114,9 @@ public class Canvas {
    * This method takes in a horizontal and vertical coordinate and returns the value of the activation of said pixel. If true, the
    * pixel is turned on, otherwise it is off.
    *
-   * @param x Horizontal coordinate of pixel
-   * @param y Vertical coordinate of pixel
-   * @return Boolean The activation value of the pixel
+   * @param x Horizontal coordinate of pixel.
+   * @param y Vertical coordinate of pixel.
+   * @return The activation value of the pixel.
    */
   public Ansi.Color get(final int x, final int y) {
     checkRange(x, y);
@@ -125,12 +125,12 @@ public class Canvas {
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinate as well as an activation state. It then applies that activation to
-   * said pixel that lives in the passed coordinates.
+   * This method takes in a horizontal and vertical coordinate as well as an activation state. It then applies that activation to said
+   * pixel that lives in the passed coordinates.
    *
-   * @param x Horizontal coordinate of pixel
-   * @param y Vertical coordinate of pixel
-   * @param color Color to set on pixel
+   * @param x Horizontal coordinate of pixel.
+   * @param y Vertical coordinate of pixel.
+   * @param color {@link org.libj.console.Ansi.Color Color} to set on pixel
    */
   public void change(final int x, final int y, final Ansi.Color color) {
     checkRange(x, y);
@@ -141,8 +141,8 @@ public class Canvas {
   /**
    * This method takes in a horizontal and vertical coordinate, it then activates said pixel by setting it's value to true.
    *
-   * @param x Horizontal coordinate of pixel
-   * @param y Vertical coordinate of pixel
+   * @param x Horizontal coordinate of pixel.
+   * @param y Vertical coordinate of pixel.
    */
   public void set(final int x, final int y) {
     set(x, y, Ansi.Color.DEFAULT);
@@ -155,8 +155,8 @@ public class Canvas {
   /**
    * This method takes in a horizontal and vertical coordinate, it then deactivates said pixel by setting it's value to false.
    *
-   * @param x Horizontal coordinate of pixel
-   * @param y Vertical coordinate of pixel
+   * @param x Horizontal coordinate of pixel.
+   * @param y Vertical coordinate of pixel.
    */
   public void unset(final int x, final int y) {
     change(x, y, null);
@@ -173,8 +173,8 @@ public class Canvas {
   }
 
   /**
-   * This method traverses through all the BrailleMap objects and renders out the sub-matrices by asking for the object's string
-   * value with the getString method. It then prints them all out to the screen by using the overloaded corresponding render method.
+   * This method traverses through all the BrailleMap objects and renders out the sub-matrices by asking for the object's string value
+   * with the getString method. It then prints them all out to the screen by using the overloaded corresponding render method.
    */
   public void render() {
     try {
@@ -186,13 +186,13 @@ public class Canvas {
   }
 
   /**
-   * This method traverses through all the BrailleMap objects and renders out the sub-matrices by asking for the object's string
-   * value with the getString method. It then writes said output to the specified ByteArrayOutputStream. This stream is then
-   * returned back to caller for method chaining.
+   * This method traverses through all the BrailleMap objects and renders out the sub-matrices by asking for the object's string value
+   * with the getString method. It then writes said output to the specified ByteArrayOutputStream. This stream is then returned back
+   * to caller for method chaining.
    *
-   * @param out Stream to write to
-   * @return Same stream that was passed in
-   * @throws IOException ByteArrayOutputStream throws exception
+   * @param out Stream to write to.
+   * @return Same stream that was passed in.
+   * @throws IOException If an I/O error has occurred.
    */
   public OutputStream render(final OutputStream out) throws IOException {
     for (int i = 0; i < area; ++i) { // [N]

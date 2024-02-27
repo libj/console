@@ -120,7 +120,7 @@ public class CanvasTest {
       canvas.set(1, 1);
       canvas.set(1, 2);
       String result = canvas.render(output).toString().replace("\n", "");
-//      assertTrue(result.equals("\u2830\u2800"));
+      // assertTrue(result.equals("\u2830\u2800"));
     }
     catch (final Exception e) {
       assertTrue(false);

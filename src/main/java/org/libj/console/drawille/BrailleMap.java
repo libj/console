@@ -48,8 +48,8 @@ public class BrailleMap {
    * can be expressed by a 4 by 2 dot matrix, these bounds are taken to be the upper bound respectively while negative numbers are
    * taken as the lower bound.
    *
-   * @param x Horizontal coordinate
-   * @param y Vertical coordinate
+   * @param x Horizontal coordinate.
+   * @param y Vertical coordinate.
    */
   protected void checkRange(final int x, final int y) {
     if (x < 0 || y < 0 || x > 1 || y > 3)
@@ -57,12 +57,12 @@ public class BrailleMap {
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinates alongside a matrix entry value. It then sets said value into the
-   * pixel matrix based on the passed coordinates
+   * This method takes in a horizontal and vertical coordinates alongside a matrix entry value. It then sets said value into the pixel
+   * matrix based on the passed coordinates
    *
-   * @param x Horizontal coordinate
-   * @param y Vertical coordinate
-   * @param color The color to set matrix entry to
+   * @param x Horizontal coordinate.
+   * @param y Vertical coordinate.
+   * @param color {@link org.libj.console.Ansi.Color Color} to set matrix entry to.
    */
   public void change(final int x, final int y, final Ansi.Color color) {
     checkRange(x, y);
@@ -73,9 +73,9 @@ public class BrailleMap {
    * This method takes in a horizontal and vertical coordinates and it returns the value that is saved in the pixel matrix based on
    * the passed coordinates.
    *
-   * @param x Horizontal coordinate
-   * @param y Vertical coordinate
-   * @return Boolean Saved state based on coordinates
+   * @param x Horizontal coordinate.
+   * @param y Vertical coordinate.
+   * @return Boolean Saved state based on coordinates.
    */
   public Ansi.Color get(final int x, final int y) {
     checkRange(x, y);
@@ -83,11 +83,11 @@ public class BrailleMap {
   }
 
   /**
-   * This method takes in a horizontal and vertical coordinates, it then activates the value into the pixel matrix based on the
-   * passed coordinates.
+   * This method takes in a horizontal and vertical coordinates, it then activates the value into the pixel matrix based on the passed
+   * coordinates.
    *
-   * @param x Horizontal coordinate
-   * @param y Vertical coordinate
+   * @param x Horizontal coordinate.
+   * @param y Vertical coordinate.
    */
   public void set(final int x, final int y) {
     set(x, y, Ansi.Color.DEFAULT);
@@ -101,8 +101,8 @@ public class BrailleMap {
    * This method takes in a horizontal and vertical coordinates, it then deactivates the value into the pixel matrix based on the
    * passed coordinates.
    *
-   * @param x Horizontal coordinate
-   * @param y Vertical coordinate
+   * @param x Horizontal coordinate.
+   * @param y Vertical coordinate.
    */
   public void unset(final int x, final int y) {
     change(x, y, null);
@@ -117,10 +117,10 @@ public class BrailleMap {
   }
 
   /**
-   * This method traverses through the pixel map matrix and transforms the matrix into a braille character. The resulting character
-   * is returned in string value.
+   * This method traverses through the pixel map matrix and transforms the matrix into a braille character. The resulting character is
+   * returned in string value.
    *
-   * @return String Pixel matrix as braille character
+   * @return Pixel matrix as braille character.
    */
   @Override
   public String toString() {

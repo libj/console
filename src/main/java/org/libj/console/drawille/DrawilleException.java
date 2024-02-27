@@ -27,10 +27,10 @@ public class DrawilleException extends RuntimeException {
    * This constructor takes in an (x,y) value pair and displays those pairs to the user. These values are defined to be out of range
    * by the caller, therefore the caller will be alerted.
    *
-   * @param x The passed horizontal coordinate
-   * @param y The passed vertical coordinate
+   * @param x The passed horizontal coordinate.
+   * @param y The passed vertical coordinate.
    */
-  public DrawilleException(int x, int y) {
+  public DrawilleException(final int x, final int y) {
     super(String.format("Out of range {x:%d,y:%d}", x, y));
   }
 }

@@ -38,8 +38,8 @@ public class Turtle extends Canvas {
   /**
    * This constructor simply calls the super constructor and passes the desired dimensions.
    *
-   * @param width Desired width of canvas
-   * @param height Desired height of canvas
+   * @param width Desired width of canvas.
+   * @param height Desired height of canvas.
    */
   public Turtle(final int width, final int height) {
     super(width, height);
@@ -48,7 +48,7 @@ public class Turtle extends Canvas {
   /**
    * This method simply returns the horizontal component of the position of the pen.
    *
-   * @return double Horizontal position of pen
+   * @return double Horizontal position of pen.
    */
   public double getX() {
     return x;
@@ -57,7 +57,7 @@ public class Turtle extends Canvas {
   /**
    * This method simply returns the vertical component of the position of the pen.
    *
-   * @return double Vertical position of pen
+   * @return double Vertical position of pen.
    */
   public double getY() {
     return y;
@@ -89,7 +89,7 @@ public class Turtle extends Canvas {
   /**
    * This method takes in the angle to add to the right and adds it to the pen angle.
    *
-   * @param angle Angle to move right
+   * @param angle Angle to move right.
    */
   public void right(final double angle) {
     a += angle;
@@ -98,17 +98,17 @@ public class Turtle extends Canvas {
   /**
    * This method takes in the angle to add to the left and subtracts it from pen angle.
    *
-   * @param angle Angle to move right
+   * @param angle Angle to move right.
    */
   public void left(final double angle) {
     a -= angle;
   }
 
   /**
-   * This method takes in the length and expects us to move backwards with the pen based on the current pen angle. The forward
-   * method is used to implement this method by simply passing in the same scalar value of length but in the opposite direction.
+   * This method takes in the length and expects us to move backwards with the pen based on the current pen angle. The forward method
+   * is used to implement this method by simply passing in the same scalar value of length but in the opposite direction.
    *
-   * @param length Length to move back
+   * @param length Length to move back.
    */
   public void backward(final double length) {
     forward(length * -1);
@@ -117,7 +117,7 @@ public class Turtle extends Canvas {
   /**
    * This method takes in the length and expects us to move forwards with the pen based on the current pen angle.
    *
-   * @param length Length to move forward
+   * @param length Length to move forward.
    */
   public void forward(double length) {
     final double theta = a / 180.0 * Math.PI;
@@ -128,8 +128,8 @@ public class Turtle extends Canvas {
    * This method takes in a new horizontal and vertical coordinate and based on the current coordinates, it draws a line to connect
    * them. If the state of isDrawing is false, then we do not draw and instead just move the pen to those coordinates.
    *
-   * @param x Horizontal coordinate
-   * @param y Vertical coordinate
+   * @param x Horizontal coordinate.
+   * @param y Vertical coordinate.
    */
   public void move(final double x, final double y) {
     if (isDrawing) {

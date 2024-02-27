@@ -198,8 +198,8 @@ public final class Ansi {
   }
 
   /**
-   * Accepts a string that may contain ANSI escapes for colors and intensities, and returns an equivalent string with the same
-   * colors and intensities as HTML+CSS tags.
+   * Accepts a string that may contain ANSI escapes for colors and intensities, and returns an equivalent string with the same colors
+   * and intensities as HTML+CSS tags.
    *
    * @param str The string whose ANSI-escaped colors and/or intensities are to be transformed into HTML+CSS equivalents.
    * @return The transformed string.
