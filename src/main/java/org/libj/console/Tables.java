@@ -583,7 +583,7 @@ public final class Tables {
         builder.append('═');
       }
 
-      builder.append("╣");
+      builder.append('╣');
     }
 
     // Print the data rows
